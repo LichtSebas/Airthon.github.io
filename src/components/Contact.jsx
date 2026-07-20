@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Contact = () => {
   return (
@@ -19,7 +20,7 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <h3 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '40px' }}>Contacto Directo</h3>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
                 <div style={{ padding: '15px', background: 'rgba(255,255,255,0.05)', borderRadius: '15px', color: 'var(--accent-color)' }}>
@@ -53,49 +54,49 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.form
+          <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
-            onSubmit={(e) => e.preventDefault()}
+            style={{ display: 'flex', flexDirection: 'column', gap: '30px', justifyContent: 'center' }}
           >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-              <input 
-                type="text" 
-                placeholder="Nombre" 
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '20px', borderRadius: '15px', color: 'white', outline: 'none' }}
-              />
-              <input 
-                type="email" 
-                placeholder="Email" 
-                style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '20px', borderRadius: '15px', color: 'white', outline: 'none' }}
-              />
-            </div>
-            <textarea 
-              placeholder="¿En qué puedo ayudarte?" 
-              rows="6"
-              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '20px', borderRadius: '15px', color: 'white', outline: 'none', resize: 'none' }}
-            ></textarea>
-            <button 
-              style={{ 
-                background: 'var(--accent-color)', 
-                color: 'black', 
-                fontWeight: '900', 
-                padding: '20px', 
-                borderRadius: '15px', 
-                border: 'none', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                gap: '10px',
-                fontSize: '1rem'
-              }}
+            <a 
+              href="https://wa.me/51924461067" 
+              target="_blank" 
+              rel="noreferrer"
+              className="glass-card"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', textDecoration: 'none', padding: '30px', color: 'white' }}
             >
-              Enviar Mensaje <Send size={20} />
-            </button>
-          </motion.form>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ background: '#25D366', color: 'white', padding: '15px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <FaWhatsapp size={30} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Escribir al WhatsApp</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Respuesta rápida</p>
+                </div>
+              </div>
+              <ArrowRight className="accent-text" />
+            </a>
+
+            <a 
+              href="mailto:sebastiangairthon@gmail.com" 
+              className="glass-card"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', textDecoration: 'none', padding: '30px', color: 'white' }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <div style={{ background: 'var(--accent-glow)', color: 'var(--accent-color)', padding: '15px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Mail size={30} />
+                </div>
+                <div>
+                  <h4 style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Enviar Correo</h4>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>sebastiangairthon@gmail.com</p>
+                </div>
+              </div>
+              <ArrowRight className="accent-text" />
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -4,9 +4,9 @@ import { motion, useSpring } from 'framer-motion';
 const CustomCursor = () => {
   const [isPointer, setIsPointer] = useState(false);
   
-  // High-performance springs for smooth movement
-  const cursorX = useSpring(0, { damping: 25, stiffness: 200 });
-  const cursorY = useSpring(0, { damping: 25, stiffness: 200 });
+  // Reduced sensitivity (tighter spring) for a more professional feel
+  const cursorX = useSpring(0, { damping: 40, stiffness: 400 });
+  const cursorY = useSpring(0, { damping: 40, stiffness: 400 });
 
   useEffect(() => {
     const moveCursor = (e) => {
@@ -47,8 +47,8 @@ const CustomCursor = () => {
       <motion.div 
         className="cursor-outline" 
         animate={{
-          width: isPointer ? 90 : 24, // Expanded size on hover
-          height: isPointer ? 90 : 24,
+          width: isPointer ? 50 : 24, // Smaller expanded size on hover
+          height: isPointer ? 50 : 24,
           backgroundColor: isPointer ? 'rgba(243, 156, 18, 0.15)' : 'transparent',
           borderWidth: isPointer ? '1px' : '2px',
           opacity: 1

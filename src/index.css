@@ -380,3 +380,13 @@ h1, h2, h3, h4 {
 .animate-fadeIn {
   animation: fadeIn 0.8s ease forwards;
 }
+
+/* Disable Custom Cursor on Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+  .cursor-dot, .cursor-outline {
+    display: none !important;
+  }
+}

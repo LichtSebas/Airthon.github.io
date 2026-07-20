@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, CheckCircle2, BookOpen } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
+import satKioscoImg from '../imagenes/SATPresention.PNG';
+import audioExtractorImg from '../imagenes/AudioExtractor.png';
 
 const projectData = {
   'edam-web': {
@@ -23,14 +25,25 @@ const projectData = {
     results: ['Más de 500 sorteos realizados con éxito.', 'Cero incidencias de seguridad reportadas.'],
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'
   },
-  'tech-store': {
-    title: 'TechStore DB',
-    description: 'Arquitectura de base de datos optimizada para retail tecnológico.',
-    fullContent: 'Diseño lógico y físico de una base de datos escalable para manejar miles de transacciones diarias y gestión de stock multicanal.',
-    tech: ['SQL Server', 'T-SQL', 'Database Tuning'],
-    challenges: ['Normalización de datos complejos de proveedores.', 'Optimización de consultas para reportes de ventas masivos.'],
-    results: ['Mejora del 60% en el tiempo de respuesta de reportes.', 'Integridad referencial 100% garantizada.'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?q=80&w=2026&auto=format&fit=crop'
+  'sat-kiosco-inteligente': {
+    title: 'SAT Kiosco',
+    description: 'Kiosco digital para facilitar los trámites tributarios a adultos mayores.',
+    fullContent: 'El proyecto "SAT Kiosco" surge de la necesidad de cerrar la brecha digital en la atención al público adulto mayor. Se diseñó una interfaz interactiva y amigable que simplifica procesos complejos, pagos y consultas, reduciendo la fricción y el tiempo de espera en ventanillas.',
+    tech: ['React', 'Figma', 'UX/UI Design', 'Accesibilidad'],
+    challenges: ['Diseñar una interfaz altamente intuitiva para usuarios con poca experiencia digital.', 'Integración fluida con los sistemas heredados de la institución tributaria.'],
+    results: ['Reducción del 50% en los tiempos de espera presencial.', 'Altos índices de satisfacción reportados por usuarios mayores de 60 años.'],
+    image: satKioscoImg,
+    demoUrl: 'https://lichtsebas.github.io/sat-kiosco-demo/',
+    docUrl: 'https://github.com/LichtSebas/sat-kiosco-demo'
+  },
+  'audio-extractor': {
+    title: 'AudioExtractor',
+    description: 'Herramienta de escritorio eficiente para extraer y convertir audio desde archivos de video.',
+    fullContent: 'AudioExtractor fue desarrollado para automatizar y simplificar la extracción de pistas de audio (MP3, WAV) a partir de videos en múltiples formatos (MP4, MKV, AVI). Su enfoque principal es la rapidez, conservando la mayor fidelidad de sonido posible.',
+    tech: ['Python', 'FFmpeg', 'Tkinter/PyQt', 'Audio Processing'],
+    challenges: ['Manejo eficiente de archivos de video pesados (varios GB) sin saturar la memoria RAM.', 'Interfaz de usuario sencilla pero potente para usuarios no técnicos.'],
+    results: ['Procesamiento hasta un 30% más rápido que herramientas gratuitas genéricas.', 'Conversión exitosa de más de 20 formatos de video distintos a audio de alta calidad.'],
+    image: audioExtractorImg
   }
 };
 
@@ -84,12 +97,16 @@ const ProjectDetails = () => {
             </div>
 
             <div style={{ display: 'flex', gap: '20px' }}>
-              <button className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', background: 'var(--accent-color)', color: 'black', fontWeight: 'bold' }}>
-                Ver Demo <ExternalLink size={18} />
-              </button>
-              <button className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px' }}>
-                Código <FaGithub size={18} />
-              </button>
+              {project.demoUrl && (
+                <a href={project.demoUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', background: 'var(--accent-color)', color: 'black', fontWeight: 'bold', textDecoration: 'none' }}>
+                  Ver Demo <ExternalLink size={18} />
+                </a>
+              )}
+              {project.docUrl && (
+                <a href={project.docUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', textDecoration: 'none' }}>
+                  Documentación <BookOpen size={18} />
+                </a>
+              )}
             </div>
           </motion.div>
 

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "certificado_anlisis_de_datos_con_power_bi",
+    "title": "Análisis de Datos con Power BI",
+    "issuer": "Plataforma Educativa",
+    "date": "Marzo 2026",
+    "image": "/certificados/certificado_anlisis_de_datos_con_power_bi.png",
+    "description": "Certificación obtenida al completar exitosamente el curso de Análisis de Datos con Power BI.",
+    "skills": [],
+    "credentialUrl": ""
+  },
+  {
+    "id": "certificado_design_thinking",
+    "title": "Design Thinking",
+    "issuer": "Plataforma Educativa",
+    "date": "Febrero 2026",
+    "image": "/certificados/certificado_design_thinking.png",
+    "description": "Certificación obtenida al completar exitosamente el curso de Design Thinking.",
+    "skills": [],
+    "credentialUrl": ""
+  },
+  {
+    "id": "certificado_excel_avanzado-(1)",
+    "title": "Excel Avanzado",
+    "issuer": "Plataforma Educativa",
+    "date": "Diciembre 2025",
+    "image": "/certificados/certificado_excel_avanzado-(1).png",
+    "description": "Certificación obtenida al completar exitosamente el curso de Excel Avanzado.",
+    "skills": [],
+    "credentialUrl": ""
+  },
+  {
+    "id": "certificado_fundamentos_de_ux",
+    "title": "Fundamentos de UX",
+    "issuer": "Plataforma Educativa",
+    "date": "Febrero 2026",
+    "image": "/certificados/certificado_fundamentos_de_ux.png",
+    "description": "Certificación obtenida al completar exitosamente el curso de Fundamentos de UX.",
+    "skills": [],
+    "credentialUrl": ""
+  },
+  {
+    "id": "certificado_gestin_gil_de_proyectos_scrum",
+    "title": "Gestión ágil de proyectos (SCRUM)",
+    "issuer": "Plataforma Educativa",
+    "date": "Febrero 2026",
+    "image": "/certificados/certificado_gestin_gil_de_proyectos_scrum.png",
+    "description": "Certificación obtenida al completar exitosamente el curso de Gestión ágil de proyectos (SCRUM).",
+    "skills": [],
+    "credentialUrl": ""
+  }
+]
