@@ -1,16 +1,47 @@
-# React + Vite
+# Portafolio Profesional - Sebastian Gonzales
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Portafolio web interactivo y de alto rendimiento diseñado para destacar habilidades de desarrollo de software, proyectos y certificaciones.
 
-Currently, two official plugins are available:
+🔗 **Sitio en vivo**: [https://sebastianga.xyz](https://sebastianga.xyz)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🚀 Características Clave
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Diseño Interactivo y Fluido**: Interfaz moderna de tipo *Glassmorphism* con animaciones dinámicas gestionadas por `framer-motion`.
+*   **Cursor Inteligente**: Cursor personalizado con físicas inerciales (`useSpring`) que se adapta a elementos interactivos y se apaga automáticamente en pantallas táctiles.
+*   **Sección de Certificados**: Visualizador dinámico de certificaciones que incluye un modal interactivo con detalles ampliados y habilidades validadas.
+*   **Automatización con Python**: Script que analiza PDFs de certificados, genera previsualizaciones PNG optimizadas de manera automática y aprende a reconocer emisores cruzando las firmas MD5 de sus logos.
+*   **Despliegue Continuo (CI/CD)**: Pipeline en GitHub Actions configurado para compilar y publicar los cambios en vivo en cada `git push`.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📖 Documentación Detallada
+
+Toda la información de la arquitectura técnica, guías de mantenimiento local y automatización de certificados se encuentra documentada en español:
+
+👉 **[DOCUMENTACION.md](file:///d:/Portfolio/DOCUMENTACION.md)**
+
+---
+
+## 🛠️ Comandos Rápidos
+
+### Instalación de dependencias
+```bash
+npm install
+```
+
+### Iniciar servidor de desarrollo local
+```bash
+npm run dev
+```
+
+### Ejecutar compilación de producción local
+```bash
+npm run build
+```
+
+### Ejecutar script de procesamiento de certificados
+```bash
+python scripts/process_certificates.py
+```
