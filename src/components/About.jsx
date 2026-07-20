@@ -27,7 +27,7 @@ const About = () => {
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Año de Exp.</p>
               </div>
               <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>10+</h4>
+                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>4+</h4>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Proyectos</p>
               </div>
             </div>

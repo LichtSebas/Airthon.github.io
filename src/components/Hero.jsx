@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ChevronDown } from 'lucide-react';
+import { Mail, ChevronDown, Download } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Hero = () => {
@@ -51,6 +51,42 @@ const Hero = () => {
           </a>
           <a href="mailto:sebastiangairthon@gmail.com" className="social-icon">
             <Mail size={24} />
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.75 }}
+        >
+          <a
+            href="/CV_Sebastian_Gonzales.pdf"
+            download="CV_Sebastian_Gonzales.pdf"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'var(--accent-color)',
+              color: 'black',
+              padding: '14px 32px',
+              borderRadius: '14px',
+              fontSize: '1rem',
+              fontWeight: '700',
+              textDecoration: 'none',
+              transition: 'var(--transition)',
+              boxShadow: '0 4px 20px var(--accent-glow)'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = '0 10px 30px var(--accent-glow)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.boxShadow = '0 4px 20px var(--accent-glow)';
+            }}
+          >
+            <Download size={20} />
+            Descargar CV
           </a>
         </motion.div>
 
