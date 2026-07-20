@@ -2,6 +2,7 @@ import os
 import re
 import json
 import sys
+import hashlib
 import fitz  # PyMuPDF
 
 # Configurar codificación de consola para evitar UnicodeEncodeError en Windows
@@ -17,11 +18,29 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PDF_DIR = os.path.join(PROJECT_ROOT, "Certificados")
 PUBLIC_DIR = os.path.join(PROJECT_ROOT, "public", "certificados")
 JSON_PATH = os.path.join(PROJECT_ROOT, "src", "data", "certificates.json")
+MAPPINGS_PATH = os.path.join(PROJECT_ROOT, "src", "data", "logo_mappings.json")
 
 # Asegurar que existan los directorios
 os.makedirs(PDF_DIR, exist_ok=True)
 os.makedirs(PUBLIC_DIR, exist_ok=True)
 os.makedirs(os.path.dirname(JSON_PATH), exist_ok=True)
+
+# Cargar y guardar mapeo de logos
+def load_logo_mappings():
+    if os.path.exists(MAPPINGS_PATH):
+        try:
+            with open(MAPPINGS_PATH, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            pass
+    return {}
+
+def save_logo_mappings(mappings):
+    try:
+        with open(MAPPINGS_PATH, "w", encoding="utf-8") as f:
+            json.dump(mappings, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"[ERROR] No se pudo guardar el mapeo de logos: {e}")
 
 # Listas de meses para detección de fechas
 MONTHS_ES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
@@ -154,6 +173,35 @@ def parse_certificate_template(text, filename):
         }
     return None
 
+def get_logo_hash(doc):
+    for page in doc:
+        for img_info in page.get_images():
+            xref = img_info[0]
+            width = img_info[2]
+            height = img_info[3]
+            colorspace = img_info[5]
+            aspect_ratio = width / height if height > 0 else 0
+            
+            # Un logo suele ser cuadrado (aspect ratio ~ 1), de tamaño moderado y a color (RGB)
+            if 0.8 <= aspect_ratio <= 1.2 and width < 1500 and colorspace == "DeviceRGB":
+                try:
+                    base_image = doc.extract_image(xref)
+                    image_bytes = base_image["image"]
+                    return hashlib.md5(image_bytes).hexdigest()
+                except Exception:
+                    continue
+    return None
+
+def ask_user_for_issuer(title):
+    if not sys.stdin.isatty():
+        return "Por definir"
+    try:
+        print(f"\n[?] Se detectó un nuevo certificado: '{title}' con un logo no registrado.")
+        issuer = input("¿Quién emitió este certificado? (Ej: Becas Grupo Romero, Udemy, Platzi): ").strip()
+        return issuer if issuer else "Por definir"
+    except (EOFError, Exception):
+        return "Por definir"
+
 def process_pdf(pdf_path, filename):
     cert_id = os.path.splitext(filename)[0].lower().replace(" ", "-")
     png_filename = f"{cert_id}.png"
@@ -185,6 +233,28 @@ def process_pdf(pdf_path, filename):
             issuer = guess_issuer(text)
             date = guess_date(text)
             description = f"Certificación obtenida al completar exitosamente el curso {title} dictado por {issuer}."
+            
+        # 3. Detección de emisor por firma del logo (MD5)
+        logo_hash = get_logo_hash(doc)
+        if logo_hash:
+            mappings = load_logo_mappings()
+            if logo_hash in mappings:
+                issuer = mappings[logo_hash]
+                # Reconstruir la descripción con el emisor correcto
+                if parsed:
+                    description = f"Certificación obtenida al completar exitosamente el curso de {title} dictado por {issuer}."
+                else:
+                    description = f"Certificación obtenida al completar exitosamente el curso {title} dictado por {issuer}."
+            else:
+                user_issuer = ask_user_for_issuer(title)
+                if user_issuer != "Por definir":
+                    issuer = user_issuer
+                    mappings[logo_hash] = issuer
+                    save_logo_mappings(mappings)
+                    if parsed:
+                        description = f"Certificación obtenida al completar exitosamente el curso de {title} dictado por {issuer}."
+                    else:
+                        description = f"Certificación obtenida al completar exitosamente el curso {title} dictado por {issuer}."
         
         doc.close()
         
