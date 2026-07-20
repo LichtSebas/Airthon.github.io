@@ -1,8 +1,48 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import profileImg from '../assets/SebastianGonzales.jpeg';
 
+// Importamos los proyectos para contar dinámicamente
+import satKioscoImg from '../imagenes/SATPresention.PNG';
+import audioExtractorImg from '../imagenes/AudioExtractor.png';
+
+const projects = [
+  { id: 'sat-kiosco-inteligente' },
+  { id: 'edam-web' },
+  { id: 'sorteos-plat' },
+  { id: 'audio-extractor' }
+];
+
+// Componente de contador animado
+const AnimatedCounter = ({ target, suffix = '', duration = 1500 }) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let start = 0;
+    const step = Math.ceil(target / (duration / 30));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 30);
+
+    return () => clearInterval(timer);
+  }, [isInView, target, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+};
+
 const About = () => {
+  const totalProjects = projects.length;
+
   return (
     <section id="about" className="section" style={{ backgroundColor: 'var(--bg-color)' }}>
       <div className="container">
@@ -23,11 +63,15 @@ const About = () => {
             
             <div className="grid-2" style={{ gap: '20px' }}>
               <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>1+</h4>
+                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>
+                  <AnimatedCounter target={1} suffix="+" />
+                </h4>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Año de Exp.</p>
               </div>
               <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>4+</h4>
+                <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>
+                  <AnimatedCounter target={totalProjects} suffix="+" />
+                </h4>
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Proyectos</p>
               </div>
             </div>
@@ -84,3 +128,4 @@ const About = () => {
 };
 
 export default About;
+
