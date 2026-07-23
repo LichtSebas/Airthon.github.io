@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import profileImg from '../assets/SebastianGonzales.jpeg';
-
-// Importamos los proyectos para contar dinámicamente
-import satKioscoImg from '../imagenes/SATPresention.PNG';
-import audioExtractorImg from '../imagenes/AudioExtractor.png';
+import { useLanguage } from '../context/LanguageContext';
 
 const projects = [
   { id: 'sat-kiosco-inteligente' },
@@ -13,7 +10,6 @@ const projects = [
   { id: 'audio-extractor' }
 ];
 
-// Componente de contador animado
 const AnimatedCounter = ({ target, suffix = '', duration = 1500 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -41,6 +37,7 @@ const AnimatedCounter = ({ target, suffix = '', duration = 1500 }) => {
 };
 
 const About = () => {
+  const { t } = useLanguage();
   const totalProjects = projects.length;
 
   return (
@@ -53,26 +50,26 @@ const About = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="section-title">Sobre <span className="accent-text">Mí</span></h2>
+            <h2 className="section-title">{t.about.title} <span className="accent-text">{t.about.titleAccent}</span></h2>
             <p className="text-lg mb-8" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-              Soy un apasionado de la tecnología con experiencia práctica en el desarrollo <strong>Fullstack</strong>, diseño web y automatización de procesos. Mi enfoque se centra en crear soluciones que no solo funcionen, sino que aporten un valor real al usuario final.
+              {t.about.p1}
             </p>
             <p className="text-lg mb-10" style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.8' }}>
-              Actualmente estudio Ingeniería de Software en la <strong>Universidad Científica del Sur</strong>, donde sigo perfeccionando mis habilidades técnicas y mi capacidad para resolver problemas complejos mediante el código.
+              {t.about.p2}
             </p>
             
             <div className="grid-2" style={{ gap: '20px' }}>
               <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
                 <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>
-                  <AnimatedCounter target={1} suffix="+" />
+                  <AnimatedCounter target={6} suffix="+" />
                 </h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Año de Exp.</p>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.about.expMonths}</p>
               </div>
               <div className="glass-card" style={{ padding: '1.5rem', textAlign: 'center' }}>
                 <h4 className="accent-text" style={{ fontSize: '2.5rem', fontWeight: '900' }}>
                   <AnimatedCounter target={totalProjects} suffix="+" />
                 </h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Proyectos</p>
+                <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>{t.about.completedProjects}</p>
               </div>
             </div>
           </motion.div>
@@ -100,26 +97,10 @@ const About = () => {
                   width: '100%', 
                   height: '100%', 
                   objectFit: 'cover', 
-                  borderRadius: '30px', 
-                  filter: 'contrast(1.1) brightness(0.9)',
-                  transition: 'transform 0.5s ease'
-                }}
-                onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                  borderRadius: '30px'
+                }} 
               />
             </div>
-            {/* Abstract Shape */}
-            <div style={{ 
-              position: 'absolute', 
-              top: '-20px', 
-              right: '-20px', 
-              width: '100px', 
-              height: '100px', 
-              background: 'var(--accent-color)', 
-              borderRadius: '20px', 
-              zIndex: -1,
-              opacity: 0.5
-            }} />
           </motion.div>
         </div>
       </div>
@@ -128,4 +109,3 @@ const About = () => {
 };
 
 export default About;
-

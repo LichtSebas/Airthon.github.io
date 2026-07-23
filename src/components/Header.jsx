@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { lang, toggleLang, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,7 +28,6 @@ const Header = () => {
       
       if (location.pathname !== '/') {
         navigate('/');
-        // Wait for home page to render before scrolling
         setTimeout(() => {
           const element = document.getElementById(targetId);
           if (element) {
@@ -49,12 +50,12 @@ const Header = () => {
   };
 
   const navLinks = [
-    { name: 'Inicio', href: '/#home' },
-    { name: 'Sobre Mí', href: '/#about' },
-    { name: 'Habilidades', href: '/#skills' },
-    { name: 'Experiencia', href: '/#experience' },
-    { name: 'Certificados', href: '/certificados' },
-    { name: 'Contacto', href: '/#contact' },
+    { name: t.nav.home, href: '/#home' },
+    { name: t.nav.about, href: '/#about' },
+    { name: t.nav.skills, href: '/#skills' },
+    { name: t.nav.experience, href: '/#experience' },
+    { name: t.nav.certificates, href: '/certificados' },
+    { name: t.nav.contact, href: '/#contact' },
   ];
 
   return (
@@ -65,26 +66,61 @@ const Header = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="nav-desktop">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="nav-link"
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <nav className="nav-desktop">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="nav-link"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
 
-        {/* Mobile Toggle */}
-        <button
-          className="nav-toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X /> : <Menu />}
-        </button>
+          {/* Language Switcher Badge */}
+          <button
+            onClick={toggleLang}
+            title={lang === 'ES' ? 'Cambiar a Inglés' : 'Switch to Spanish'}
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid var(--accent-glow)',
+              borderRadius: '20px',
+              padding: '6px 14px',
+              color: 'white',
+              fontSize: '0.82rem',
+              fontWeight: '700',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.borderColor = 'var(--accent-color)';
+              e.currentTarget.style.boxShadow = '0 0 15px var(--accent-glow)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.borderColor = 'var(--accent-glow)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <Globe size={15} className="accent-text" />
+            <span style={{ color: lang === 'ES' ? 'var(--accent-color)' : 'var(--text-secondary)' }}>ES</span>
+            <span style={{ opacity: 0.3 }}>|</span>
+            <span style={{ color: lang === 'EN' ? 'var(--accent-color)' : 'var(--text-secondary)' }}>EN</span>
+          </button>
+
+          {/* Mobile Toggle */}
+          <button
+            className="nav-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

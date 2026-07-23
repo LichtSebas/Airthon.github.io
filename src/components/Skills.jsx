@@ -9,45 +9,58 @@ import {
   SiGit, 
   SiGithub, 
   SiFigma, 
-  SiExpress,
-  SiVite
+  SiVite,
+  SiPhp,
+  SiPostgresql,
+  SiHtml5,
+  SiFramer,
+  SiDocker,
+  SiRender
 } from 'react-icons/si';
-import { FaJava, FaFileExcel, FaDatabase } from 'react-icons/fa';
+import { FaDatabase, FaCss3Alt, FaGithub as FaGithubIcon } from 'react-icons/fa';
+import { Cpu, Layout, Terminal } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Skills = () => {
+  const { t } = useLanguage();
+
   const skillGroups = [
     {
-      title: "Lenguajes",
+      title: t.skills.backendTitle,
+      badge: t.skills.backendBadge,
+      icon: <Cpu className="accent-text" size={24} />,
       skills: [
-        { name: "Python", icon: <SiPython /> },
-        { name: "JavaScript", icon: <SiJavascript /> },
-        { name: "Java", icon: <FaJava /> },
-        { name: "SQL", icon: <FaDatabase /> }
+        { name: "PHP 8 Nativo", icon: <SiPhp color="#777BB4" /> },
+        { name: "Node.js", icon: <SiNodedotjs color="#339933" /> },
+        { name: "Python", icon: <SiPython color="#3776AB" /> },
+        { name: "PostgreSQL (Supabase)", icon: <SiPostgresql color="#4169E1" /> },
+        { name: "MySQL", icon: <SiMysql color="#4479A1" /> },
+        { name: "PDO / Prepared SQL", icon: <FaDatabase color="var(--accent-color)" /> }
       ]
     },
     {
-      title: "Frameworks",
+      title: t.skills.frontendTitle,
+      badge: t.skills.frontendBadge,
+      icon: <Layout className="accent-text" size={24} />,
       skills: [
-        { name: "React", icon: <SiReact /> },
-        { name: "Node.js", icon: <SiNodedotjs /> },
-        { name: "Express", icon: <SiExpress /> },
-        { name: "Vite", icon: <SiVite /> }
+        { name: "React 19", icon: <SiReact color="#61DAFB" /> },
+        { name: "JavaScript (ES6+)", icon: <SiJavascript color="#F7DF1E" /> },
+        { name: "HTML5", icon: <SiHtml5 color="#E34F26" /> },
+        { name: "CSS Vanilla / Mobile-First", icon: <FaCss3Alt color="#1572B6" /> },
+        { name: "Framer Motion", icon: <SiFramer color="#0055FF" /> }
       ]
     },
     {
-      title: "Bases de Datos",
+      title: t.skills.devopsTitle,
+      badge: t.skills.devopsBadge,
+      icon: <Terminal className="accent-text" size={24} />,
       skills: [
-        { name: "MySQL", icon: <SiMysql /> },
-        { name: "SQL Server", icon: <FaDatabase /> }
-      ]
-    },
-    {
-      title: "Herramientas",
-      skills: [
-        { name: "Git", icon: <SiGit /> },
-        { name: "GitHub", icon: <SiGithub /> },
-        { name: "Figma", icon: <SiFigma /> },
-        { name: "Excel", icon: <FaFileExcel /> }
+        { name: "Docker", icon: <SiDocker color="#2496ED" /> },
+        { name: "Git / GitHub", icon: <SiGithub color="#FFFFFF" /> },
+        { name: "GitHub Actions", icon: <FaGithubIcon color="#2088FF" /> },
+        { name: "Render CI/CD", icon: <SiRender color="#46E3B7" /> },
+        { name: "Vite", icon: <SiVite color="#646CFF" /> },
+        { name: "Figma", icon: <SiFigma color="#F24E1E" /> }
       ]
     }
   ];
@@ -56,45 +69,71 @@ const Skills = () => {
     <section id="skills" className="section bg-[var(--secondary-bg)]">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Mis <span className="accent-text">Habilidades</span></h2>
-          <p className="section-subtitle">Tecnologías que domino para construir el futuro digital.</p>
+          <h2 className="section-title">{t.skills.title} <span className="accent-text">{t.skills.titleAccent}</span></h2>
+          <p className="section-subtitle">{t.skills.subtitle}</p>
         </div>
 
-        <div className="grid-4">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
           {skillGroups.map((group, index) => (
             <motion.div
               key={group.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
               viewport={{ once: true }}
               className="glass-card"
-              style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                padding: '30px',
+                borderRadius: '24px',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent-color)';
+                e.currentTarget.style.boxShadow = '0 10px 30px var(--accent-glow)';
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '800', textAlign: 'center' }}>{group.title}</h3>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '15px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ padding: '10px', background: 'var(--accent-glow)', borderRadius: '12px', display: 'flex' }}>
+                    {group.icon}
+                  </div>
+                  <div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0, color: 'white' }}>{group.title}</h3>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--accent-color)', fontWeight: '600' }}>{group.badge}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '12px' }}>
                 {group.skills.map(skill => (
                   <div key={skill.name} style={{ 
                     display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center', 
-                    gap: '10px',
-                    padding: '15px 10px',
+                    alignItems: 'center',
+                    gap: '12px',
+                    padding: '12px 14px',
                     background: 'rgba(255,255,255,0.03)',
-                    borderRadius: '15px',
+                    borderRadius: '14px',
                     transition: 'all 0.3s ease'
                   }}
                   onMouseOver={(e) => {
                     e.currentTarget.style.background = 'var(--accent-glow)';
-                    e.currentTarget.style.color = 'var(--accent-color)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseOut={(e) => {
                     e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-                    e.currentTarget.style.color = 'white';
+                    e.currentTarget.style.transform = 'none';
                   }}
                   >
-                    <span style={{ fontSize: '1.5rem' }}>{skill.icon}</span>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '500' }}>{skill.name}</span>
+                    <span style={{ fontSize: '1.4rem', display: 'flex', flexShrink: 0 }}>{skill.icon}</span>
+                    <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'white', lineHeight: '1.2' }}>{skill.name}</span>
                   </div>
                 ))}
               </div>

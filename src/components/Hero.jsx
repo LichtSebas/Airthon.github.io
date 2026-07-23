@@ -1,9 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, ChevronDown, Download } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, ChevronDown, Download, Award } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="home" className="hero">
       <div className="hero-glow-1" />
@@ -16,7 +20,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="hero-tag"
         >
-          Bienvenido a mi mundo digital
+          {t.hero.tag}
         </motion.p>
 
         <motion.h1
@@ -34,7 +38,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="hero-subtitle"
         >
-          Estudiante de <strong>Ingeniería de Software</strong> & Programador <strong>Fullstack</strong> especializado en soluciones eficientes y creativas.
+          {t.hero.subtitlePrefix}<strong>{t.hero.softwareEng}</strong>{t.hero.and}<strong>{t.hero.fullstack}</strong>{t.hero.subtitleSuffix}
         </motion.h2>
 
         <motion.div
@@ -46,7 +50,7 @@ const Hero = () => {
           <a href="https://github.com/LichtSebas" target="_blank" rel="noreferrer" className="social-icon">
             <FaGithub size={24} />
           </a>
-          <a href="https://www.linkedin.com/in/sebastian-airthon-gonzales-aroni-13ba86344/" className="social-icon">
+          <a href="https://www.linkedin.com/in/sebastian-airthon-gonzales-aroni-13ba86344/" target="_blank" rel="noreferrer" className="social-icon">
             <FaLinkedin size={24} />
           </a>
           <a href="mailto:sebastiangairthon@gmail.com" className="social-icon">
@@ -58,6 +62,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.75 }}
+          style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
         >
           <a
             href="/CV_Sebastian_Gonzales.pdf"
@@ -86,8 +91,42 @@ const Hero = () => {
             }}
           >
             <Download size={20} />
-            Descargar CV
+            {t.hero.downloadCv}
           </a>
+
+          <Link
+            to="/certificados"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              background: 'rgba(255, 255, 255, 0.05)',
+              color: 'var(--text-color)',
+              border: '1px solid var(--accent-glow)',
+              padding: '14px 32px',
+              borderRadius: '14px',
+              fontSize: '1rem',
+              fontWeight: '700',
+              textDecoration: 'none',
+              transition: 'var(--transition)',
+              backdropFilter: 'blur(10px)'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.borderColor = 'var(--accent-color)';
+              e.currentTarget.style.color = 'var(--accent-color)';
+              e.currentTarget.style.boxShadow = '0 10px 30px var(--accent-glow)';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'none';
+              e.currentTarget.style.borderColor = 'var(--accent-glow)';
+              e.currentTarget.style.color = 'var(--text-color)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <Award size={20} className="accent-text" />
+            {t.hero.viewCertificates}
+          </Link>
         </motion.div>
 
         <div className="scroll-indicator">

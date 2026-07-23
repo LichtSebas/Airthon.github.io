@@ -1,50 +1,87 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
 import edanDecorImg from '../imagenes/1logo.png';
-
-const projects = [
-  {
-    id: 'sat-kiosco-inteligente',
-    title: 'SAT Kiosco',
-    category: 'UX & Civic Technology',
-    image: satKioscoImg,
-    description: 'Kiosco digital interactivo diseñado para ayudar a adultos mayores a realizar consultas, pagos y trámites tributarios de forma segura, intuitiva y asistida.'
-  },
-  {
-    id: 'edam-web',
-    title: 'EdanDecor Mueblería E-commerce',
-    category: 'Fullstack E-Commerce',
-    image: edanDecorImg,
-    imageFit: 'contain',
-    description: 'Plataforma e-commerce fullstack de muebles con catálogo desacoplado, autenticación OTP vía Supabase, carrito dinámico AJAX y panel de administración integral.'
-  },
-  {
-    id: 'sorteos-plat',
-    title: 'Plataforma de Sorteos',
-    category: 'Automation & Web',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
-    description: 'Plataforma automatizada para la gestión de sorteos y verificación de usuarios.'
-  },
-  {
-    id: 'audio-extractor',
-    title: 'AudioExtractor',
-    category: 'Utility & Tools',
-    image: audioExtractorImg,
-    description: 'Herramienta de escritorio eficiente para extraer y convertir audio desde archivos de video, optimizando el formato y la calidad de salida.'
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 const Projects = () => {
+  const { lang, t } = useLanguage();
+
+  const projectsES = [
+    {
+      id: 'sat-kiosco-inteligente',
+      title: 'SAT Kiosco',
+      category: 'UX & Civic Technology',
+      image: satKioscoImg,
+      description: 'Kiosco digital interactivo diseñado para ayudar a adultos mayores a realizar consultas, pagos y trámites tributarios de forma segura, intuitiva y asistida.'
+    },
+    {
+      id: 'edam-web',
+      title: 'EdanDecor Mueblería E-commerce',
+      category: 'Fullstack E-Commerce',
+      image: edanDecorImg,
+      imageFit: 'contain',
+      description: 'Plataforma e-commerce fullstack de muebles con catálogo desacoplado, autenticación OTP vía Supabase, carrito dinámico AJAX y panel de administración integral.'
+    },
+    {
+      id: 'sorteos-plat',
+      title: 'Plataforma de Sorteos',
+      category: 'Automation & Web',
+      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+      description: 'Plataforma automatizada para la gestión de sorteos y verificación de usuarios.'
+    },
+    {
+      id: 'audio-extractor',
+      title: 'AudioExtractor',
+      category: 'Utility & Tools',
+      image: audioExtractorImg,
+      description: 'Herramienta de escritorio eficiente para extraer y convertir audio desde archivos de video, optimizando el formato y la calidad de salida.'
+    }
+  ];
+
+  const projectsEN = [
+    {
+      id: 'sat-kiosco-inteligente',
+      title: 'SAT Kiosk',
+      category: 'UX & Civic Technology',
+      image: satKioscoImg,
+      description: 'Interactive digital kiosk designed to assist senior citizens with tax inquiries, payments, and procedures in a secure and intuitive manner.'
+    },
+    {
+      id: 'edam-web',
+      title: 'EdanDecor Furniture E-commerce',
+      category: 'Fullstack E-Commerce',
+      image: edanDecorImg,
+      imageFit: 'contain',
+      description: 'Fullstack furniture e-commerce platform featuring decoupled catalog, Supabase Auth OTP, AJAX dynamic cart, and comprehensive admin panel.'
+    },
+    {
+      id: 'sorteos-plat',
+      title: 'Raffle & Sweepstakes Platform',
+      category: 'Automation & Web',
+      image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+      description: 'Automated platform for running transparent, secure raffles and verifying participant eligibility.'
+    },
+    {
+      id: 'audio-extractor',
+      title: 'AudioExtractor Desktop Tool',
+      category: 'Utility & Tools',
+      image: audioExtractorImg,
+      description: 'Efficient desktop utility for extracting and converting audio from video files, optimizing format and output quality.'
+    }
+  ];
+
+  const projects = lang === 'ES' ? projectsES : projectsEN;
+
   return (
     <section id="projects" className="section bg-[var(--bg-color)]">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Mis <span className="accent-text">Proyectos</span></h2>
-          <p className="section-subtitle">Una selección de trabajos que demuestran mi capacidad técnica y creativa.</p>
+          <h2 className="section-title">{t.projects.title} <span className="accent-text">{t.projects.titleAccent}</span></h2>
+          <p className="section-subtitle">{t.projects.subtitle}</p>
         </div>
 
         <div className="grid-2" style={{ gap: '40px' }}>
@@ -117,7 +154,7 @@ const Projects = () => {
                   onMouseOver={(e) => e.currentTarget.style.gap = '15px'}
                   onMouseOut={(e) => e.currentTarget.style.gap = '10px'}
                 >
-                  Ver Documentación <ArrowRight size={20} />
+                  {t.projects.viewCaseStudy} <ArrowRight size={20} />
                 </Link>
               </div>
             </motion.div>

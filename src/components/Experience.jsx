@@ -1,16 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Experience = () => {
-  const experiences = [
+  const { lang, t } = useLanguage();
+
+  const experiencesES = [
     {
-      company: "Edam Mueblería",
+      company: "EdanDecor",
       role: "Programador Fullstack",
       period: "Jun 2025 - Ago 2025",
+      projectId: "edam-web",
       description: [
-        "Desarrollo y gestión del backend y frontend del sitio web.",
-        "Priorización de usabilidad y experiencia de usuario.",
-        "Administración de datos y optimización de procesos."
+        "Desarrollo y gestión del backend en PHP 8 y frontend responsivo.",
+        "Integración de autenticación Supabase Auth y seguridad Anti-CSRF.",
+        "Administración de base de datos PostgreSQL y optimización de carritos AJAX."
       ]
     },
     {
@@ -33,13 +39,47 @@ const Experience = () => {
     }
   ];
 
+  const experiencesEN = [
+    {
+      company: "EdanDecor",
+      role: "Fullstack Developer",
+      period: "Jun 2025 - Aug 2025",
+      projectId: "edam-web",
+      description: [
+        "Fullstack development and backend management using PHP 8 & responsive UI.",
+        "Integration of Supabase Auth REST API and Anti-CSRF session security.",
+        "PostgreSQL database administration and AJAX shopping cart optimization."
+      ]
+    },
+    {
+      company: "Makro",
+      role: "Cashier",
+      period: "Sep 2024 - Mar 2025",
+      description: [
+        "Customer service and payment processing.",
+        "Issue resolution and cash register management."
+      ]
+    },
+    {
+      company: "Bodega Susena",
+      role: "Quality Inspector",
+      period: "Jun 2023 - Dec 2023",
+      description: [
+        "Product preservation condition verification.",
+        "Expiration date control and inventory audit."
+      ]
+    }
+  ];
+
+  const experiences = lang === 'ES' ? experiencesES : experiencesEN;
+
   return (
     <section id="experience" className="section" style={{ backgroundColor: 'var(--secondary-bg)' }}>
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">Experiencia <span className="accent-text">Laboral</span></h2>
+          <h2 className="section-title">{t.experience.title} <span className="accent-text">{t.experience.titleAccent}</span></h2>
         </div>
-        
+
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           {experiences.map((exp, index) => (
             <motion.div
@@ -48,39 +88,62 @@ const Experience = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              style={{ 
-                position: 'relative', 
-                paddingLeft: '40px', 
-                paddingBottom: '60px', 
+              style={{
+                position: 'relative',
+                paddingLeft: '40px',
+                paddingBottom: '60px',
                 borderLeft: '1px solid rgba(255,255,255,0.1)'
               }}
             >
-              <div style={{ 
-                position: 'absolute', 
-                left: '-6px', 
-                top: '0', 
-                width: '12px', 
-                height: '12px', 
-                background: 'var(--accent-color)', 
+              <div style={{
+                position: 'absolute',
+                left: '-6px',
+                top: '0',
+                width: '12px',
+                height: '12px',
+                background: 'var(--accent-color)',
                 borderRadius: '50%',
                 boxShadow: '0 0 15px var(--accent-color)'
               }} />
-              
+
               <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '20px' }}>
                 <div>
                   <h3 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{exp.role}</h3>
-                  <p className="accent-text" style={{ fontWeight: '500' }}>{exp.company}</p>
+                  <p className="accent-text" style={{ fontWeight: '600' }}>{exp.company}</p>
                 </div>
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{exp.period}</span>
               </div>
-              
-              <ul style={{ listStyle: 'none', padding: '0' }}>
+
+              <ul style={{ listStyle: 'none', padding: '0', marginBottom: exp.projectId ? '20px' : '0' }}>
                 {exp.description.map((item, i) => (
                   <li key={i} style={{ color: 'var(--text-secondary)', marginBottom: '10px', display: 'flex', gap: '10px' }}>
                     <span className="accent-text">•</span> {item}
                   </li>
                 ))}
               </ul>
+
+              {exp.projectId && (
+                <Link
+                  to={`/project/${exp.projectId}`}
+                  className="accent-text"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    textDecoration: 'none',
+                    fontWeight: '700',
+                    fontSize: '0.9rem',
+                    background: 'var(--accent-glow)',
+                    padding: '8px 16px',
+                    borderRadius: '10px',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = 'translateX(5px)'}
+                  onMouseOut={(e) => e.currentTarget.style.transform = 'none'}
+                >
+                  {t.experience.viewProject} <ArrowRight size={16} />
+                </Link>
+              )}
             </motion.div>
           ))}
         </div>

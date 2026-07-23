@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, Cpu, Code2, Lock, X, Mail } from 'lucide-react';
+import { 
+  ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, 
+  Cpu, Code2, Lock, X, Mail, Laptop, Server, KeyRound, Database, 
+  GraduationCap, Rocket, ArrowRight, Sparkles, Workflow 
+} from 'lucide-react';
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
@@ -49,9 +53,55 @@ const projectData = {
       'Despliegue contenerizado en Docker parametrizado mediante variables de entorno (`.env`).',
       'Protección Anti-CSRF (tokens de 32 bytes) y cookies de sesión seguras (`HttpOnly`, `SameSite=Lax`).'
     ],
+    architectureFlow: [
+      {
+        step: '01',
+        title: 'Cliente / UI (Navegador)',
+        subtitle: 'Vanilla JS + Fetch API + CSS3',
+        desc: 'Interfaz responsive desacoplada. Peticiones AJAX asíncronas con envío de tokens Anti-CSRF de 32 bytes en cada interacción.',
+        icon: 'Laptop',
+        tag: 'HTTPS / JSON'
+      },
+      {
+        step: '02',
+        title: 'Backend en Render (Docker)',
+        subtitle: 'PHP 8 Nativo + PDO Controllers',
+        desc: 'Procesamiento modular, sanitización de entradas de usuario, lógica del carrito y gestión de sesiones seguras.',
+        icon: 'Server',
+        tag: 'PDO Prepared'
+      },
+      {
+        step: '03',
+        title: 'Supabase Auth API',
+        subtitle: 'REST API + SMTP Mailer',
+        desc: 'Gestión cifrada de contraseñas, generación de códigos OTP de 8 dígitos y verificación automática por Magic Links.',
+        icon: 'KeyRound',
+        tag: 'OTP / Magic Links'
+      },
+      {
+        step: '04',
+        title: 'PostgreSQL DB (Supabase)',
+        subtitle: 'PostgreSQL 15 + Triggers SQL',
+        desc: 'Persistencia del catálogo, paletas Hexadecimales, inventario, carritos permanentes y restricciones por Triggers.',
+        icon: 'Database',
+        tag: 'PostgreSQL'
+      }
+    ],
+    retrospective: {
+      lessons: [
+        'Integración fluida de la REST API de Supabase Auth en un entorno PHP Nativo sin utilizar SDKs pesados de terceros.',
+        'Desacoplamiento efectivo de la vista de catálogo a 100% de ancho con filtro lateral fijo de 260px en CSS Vanilla.',
+        'Diseño de seguridad multicapa con tokens Anti-CSRF de 32 bytes y parametrización mediante Docker/Render.'
+      ],
+      roadmap: [
+        'Integración de pasarela de pago directa (MercadoPago / Yape / Plin) dentro del proceso de checkout.',
+        'Implementación de sistema de caché con Redis para optimizar el rendimiento del catálogo en picos de alta demanda.',
+        'Envío automatizado de comprobantes y alertas de pedido mediante la API oficial de WhatsApp Business.'
+      ]
+    },
     image: edanDecorImg,
     imageFit: 'contain',
-    isPrivate: true, // Marcar como true si el repositorio es privado
+    isPrivate: true,
     demoUrl: 'https://tienda-muebles-7hft.onrender.com/index.php',
     docUrl: 'https://github.com/LichtSebas/tienda-muebles'
   },
@@ -86,6 +136,16 @@ const projectData = {
     results: ['Procesamiento hasta un 30% más rápido que herramientas gratuitas genéricas.', 'Conversión exitosa de más de 20 formatos de video distintos a audio de alta calidad.'],
     image: audioExtractorImg,
     isPrivate: false
+  }
+};
+
+const renderFlowIcon = (iconName) => {
+  switch (iconName) {
+    case 'Laptop': return <Laptop size={26} className="accent-text" />;
+    case 'Server': return <Server size={26} className="accent-text" />;
+    case 'KeyRound': return <KeyRound size={26} className="accent-text" />;
+    case 'Database': return <Database size={26} className="accent-text" />;
+    default: return <Cpu size={26} className="accent-text" />;
   }
 };
 
@@ -226,6 +286,108 @@ const ProjectDetails = () => {
           </div>
         </div>
 
+        {/* IDEA 4: Diagrama de Arquitectura & Flujo de Datos Interactivo */}
+        {project.architectureFlow && (
+          <div style={{ marginTop: '80px' }}>
+            <div className="section-header" style={{ textAlign: 'left', marginBottom: '40px' }}>
+              <h2 className="section-title" style={{ fontSize: '2.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <Workflow className="accent-text" size={32} /> Diagrama de Arquitectura & Flujo de Datos
+              </h2>
+              <p className="section-subtitle" style={{ textAlign: 'left', margin: '10px 0 0 0' }}>
+                Mapeo interactivo del recorrido de datos desde el navegador hasta los servicios cloud.
+              </p>
+            </div>
+
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '20px',
+              position: 'relative'
+            }}>
+              {project.architectureFlow.map((node, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true }}
+                  className="glass-card"
+                  style={{
+                    padding: '25px',
+                    borderRadius: '20px',
+                    position: 'relative',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-5px)';
+                    e.currentTarget.style.borderColor = 'var(--accent-color)';
+                    e.currentTarget.style.boxShadow = '0 12px 30px var(--accent-glow)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'none';
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                      <div style={{
+                        padding: '10px',
+                        borderRadius: '12px',
+                        background: 'var(--accent-glow)',
+                        display: 'flex'
+                      }}>
+                        {renderFlowIcon(node.icon)}
+                      </div>
+                      <span style={{
+                        fontSize: '0.8rem',
+                        fontWeight: '800',
+                        color: 'var(--accent-color)',
+                        background: 'rgba(255,255,255,0.05)',
+                        padding: '4px 10px',
+                        borderRadius: '10px'
+                      }}>
+                        Paso {node.step}
+                      </span>
+                    </div>
+
+                    <h4 style={{ fontSize: '1.15rem', fontWeight: '800', marginBottom: '5px', color: 'white' }}>
+                      {node.title}
+                    </h4>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--accent-color)', fontWeight: '600', display: 'block', marginBottom: '12px' }}>
+                      {node.subtitle}
+                    </span>
+
+                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.88rem', lineHeight: '1.6', marginBottom: '15px' }}>
+                      {node.desc}
+                    </p>
+                  </div>
+
+                  <div style={{
+                    marginTop: 'auto',
+                    paddingTop: '12px',
+                    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                    display: 'flex',
+                    justify: 'space-between',
+                    alignItems: 'center'
+                  }}>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
+                      {node.tag}
+                    </span>
+                    {i < project.architectureFlow.length - 1 && (
+                      <ArrowRight className="accent-text" size={16} style={{ opacity: 0.8 }} />
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Sección Wiki: Funcionalidades Clave */}
         {project.features && (
           <div style={{ marginTop: '80px' }}>
@@ -249,7 +411,7 @@ const ProjectDetails = () => {
 
         {/* Sección Wiki: Arquitectura y Seguridad */}
         {project.architecture && (
-          <div style={{ marginTop: '80px', marginBottom: '40px' }}>
+          <div style={{ marginTop: '80px' }}>
             <div className="glass-card" style={{ background: 'var(--card-bg)', border: '1px solid var(--accent-glow)', padding: '40px' }}>
               <h2 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <ShieldCheck className="accent-text" size={28} /> Arquitectura & Medidas de Seguridad
@@ -261,6 +423,54 @@ const ProjectDetails = () => {
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '0.95rem' }}>{item}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* IDEA 6: Lecciones Aprendidas & Retrospectiva (Roadmap V2) */}
+        {project.retrospective && (
+          <div style={{ marginTop: '80px', marginBottom: '40px' }}>
+            <div className="grid-2" style={{ gap: '40px' }}>
+              {/* Lecciones Aprendidas */}
+              <div className="glass-card" style={{ padding: '30px' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <GraduationCap className="accent-text" size={26} /> Lecciones Aprendidas
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {project.retrospective.lessons.map((lesson, idx) => (
+                    <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                      <Sparkles className="accent-text" size={18} style={{ flexShrink: 0, marginTop: '3px' }} />
+                      <span>{lesson}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Roadmap V2.0 */}
+              <div className="glass-card" style={{ padding: '30px', borderLeft: '4px solid var(--accent-color)' }}>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <Rocket className="accent-text" size={26} /> Próximas Mejoras (Roadmap V2.0)
+                </h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                  {project.retrospective.roadmap.map((item, idx) => (
+                    <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', alignItems: 'flex-start' }}>
+                      <span style={{
+                        fontSize: '0.75rem',
+                        fontWeight: '700',
+                        color: 'black',
+                        background: 'var(--accent-color)',
+                        padding: '3px 8px',
+                        borderRadius: '6px',
+                        marginTop: '2px',
+                        flexShrink: 0
+                      }}>
+                        V2.{idx + 1}
+                      </span>
+                      <span style={{ color: 'var(--text-color)', fontSize: '0.95rem', lineHeight: '1.6' }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
