@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, C
 import { FaGithub } from 'react-icons/fa';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
+import edanDecorImg from '../imagenes/1logo.png';
 
 const projectData = {
   'edam-web': {
@@ -48,7 +49,7 @@ const projectData = {
       'Despliegue contenerizado en Docker parametrizado mediante variables de entorno (`.env`).',
       'Protección Anti-CSRF (tokens de 32 bytes) y cookies de sesión seguras (`HttpOnly`, `SameSite=Lax`).'
     ],
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
+    image: edanDecorImg,
     demoUrl: 'https://tienda-muebles-7hft.onrender.com/index.php',
     docUrl: 'https://github.com/LichtSebas/tienda-muebles'
   },

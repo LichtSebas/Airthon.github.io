@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ExternalLink, ArrowRight } from 'lucide-react';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
+import edanDecorImg from '../imagenes/1logo.png';
 
 const projects = [
   {
@@ -17,7 +18,7 @@ const projects = [
     id: 'edam-web',
     title: 'EdanDecor Mueblería E-commerce',
     category: 'Fullstack E-Commerce',
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
+    image: edanDecorImg,
     description: 'Plataforma e-commerce fullstack de muebles con catálogo desacoplado, autenticación OTP vía Supabase, carrito dinámico AJAX y panel de administración integral.'
   },
   {
