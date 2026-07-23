@@ -15,10 +15,10 @@ const projects = [
   },
   {
     id: 'edam-web',
-    title: 'Edam Mueblería Web',
-    category: 'Fullstack Development',
+    title: 'EdanDecor Mueblería E-commerce',
+    category: 'Fullstack E-Commerce',
     image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop',
-    description: 'Sistema integral de gestión y venta para mueblería con panel administrativo.'
+    description: 'Plataforma e-commerce fullstack de muebles con catálogo desacoplado, autenticación OTP vía Supabase, carrito dinámico AJAX y panel de administración integral.'
   },
   {
     id: 'sorteos-plat',
