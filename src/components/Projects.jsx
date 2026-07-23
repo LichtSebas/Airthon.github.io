@@ -19,6 +19,7 @@ const projects = [
     title: 'EdanDecor Mueblería E-commerce',
     category: 'Fullstack E-Commerce',
     image: edanDecorImg,
+    imageFit: 'contain',
     description: 'Plataforma e-commerce fullstack de muebles con catálogo desacoplado, autenticación OTP vía Supabase, carrito dinámico AJAX y panel de administración integral.'
   },
   {
@@ -57,12 +58,27 @@ const Projects = () => {
               className="glass-card"
               style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
             >
-              <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/9' }}>
+              <div style={{
+                position: 'relative',
+                overflow: 'hidden',
+                aspectRatio: '16/9',
+                backgroundColor: project.imageFit === 'contain' ? '#0d0d11' : 'transparent',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: project.imageFit === 'contain' ? '2.5rem' : '0'
+              }}>
                 <img
                   src={project.image}
                   alt={project.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                  onMouseOver={(e) => e.target.style.transform = 'scale(1.1)'}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: project.imageFit || 'cover',
+                    objectPosition: 'center',
+                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                  }}
+                  onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
                   onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                 />
                 <div style={{

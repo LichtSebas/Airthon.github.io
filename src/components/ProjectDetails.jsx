@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, Cpu, Code2 } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, Cpu, Code2, Lock, X, Mail } from 'lucide-react';
+import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
 import edanDecorImg from '../imagenes/1logo.png';
@@ -50,6 +50,8 @@ const projectData = {
       'Protección Anti-CSRF (tokens de 32 bytes) y cookies de sesión seguras (`HttpOnly`, `SameSite=Lax`).'
     ],
     image: edanDecorImg,
+    imageFit: 'contain',
+    isPrivate: true, // Marcar como true si el repositorio es privado
     demoUrl: 'https://tienda-muebles-7hft.onrender.com/index.php',
     docUrl: 'https://github.com/LichtSebas/tienda-muebles'
   },
@@ -60,7 +62,8 @@ const projectData = {
     tech: ['JavaScript', 'Node.js', 'PostgreSQL', 'Framer Motion'],
     challenges: ['Seguridad contra scripts de participación automática.', 'Manejo de picos de tráfico durante los sorteos.'],
     results: ['Más de 500 sorteos realizados con éxito.', 'Cero incidencias de seguridad reportadas.'],
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
+    isPrivate: false
   },
   'sat-kiosco-inteligente': {
     title: 'SAT Kiosco',
@@ -70,6 +73,7 @@ const projectData = {
     challenges: ['Diseñar una interfaz altamente intuitiva para usuarios con poca experiencia digital.', 'Integración fluida con los sistemas heredados de la institución tributaria.'],
     results: ['Reducción del 50% en los tiempos de espera presencial.', 'Altos índices de satisfacción reportados por usuarios mayores de 60 años.'],
     image: satKioscoImg,
+    isPrivate: false,
     demoUrl: 'https://lichtsebas.github.io/sat-kiosco-demo/',
     docUrl: 'https://github.com/LichtSebas/sat-kiosco-demo'
   },
@@ -80,13 +84,15 @@ const projectData = {
     tech: ['Python', 'FFmpeg', 'Tkinter/PyQt', 'Audio Processing'],
     challenges: ['Manejo eficiente de archivos de video pesados (varios GB) sin saturar la memoria RAM.', 'Interfaz de usuario sencilla pero potente para usuarios no técnicos.'],
     results: ['Procesamiento hasta un 30% más rápido que herramientas gratuitas genéricas.', 'Conversión exitosa de más de 20 formatos de video distintos a audio de alta calidad.'],
-    image: audioExtractorImg
+    image: audioExtractorImg,
+    isPrivate: false
   }
 };
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const project = projectData[id];
+  const [isPrivateModalOpen, setIsPrivateModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -100,6 +106,13 @@ const ProjectDetails = () => {
       </div>
     );
   }
+
+  const handleRepoClick = (e) => {
+    if (project.isPrivate) {
+      e.preventDefault();
+      setIsPrivateModalOpen(true);
+    }
+  };
 
   return (
     <motion.div 
@@ -140,8 +153,16 @@ const ProjectDetails = () => {
                 </a>
               )}
               {project.docUrl && (
-                <a href={project.docUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', textDecoration: 'none' }}>
-                  Repositorio GitHub <FaGithub size={18} />
+                <a
+                  href={project.isPrivate ? '#' : project.docUrl}
+                  target={project.isPrivate ? '_self' : '_blank'}
+                  rel="noreferrer"
+                  onClick={handleRepoClick}
+                  className="social-icon"
+                  style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', textDecoration: 'none', cursor: 'pointer' }}
+                >
+                  {project.isPrivate ? 'Repositorio Privado' : 'Repositorio GitHub'}{' '}
+                  {project.isPrivate ? <Lock size={18} className="accent-text" /> : <FaGithub size={18} />}
                 </a>
               )}
             </div>
@@ -152,8 +173,22 @@ const ProjectDetails = () => {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <div className="glass-card" style={{ padding: '10px', borderRadius: '30px' }}>
-              <img src={project.image} alt={project.title} style={{ width: '100%', borderRadius: '20px', display: 'block' }} />
+            <div className="glass-card" style={{
+              padding: project.imageFit === 'contain' ? '3rem 2rem' : '10px',
+              borderRadius: '30px',
+              backgroundColor: project.imageFit === 'contain' ? '#0d0d11' : 'transparent',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <img src={project.image} alt={project.title} style={{
+                width: '100%',
+                maxHeight: '320px',
+                objectFit: project.imageFit || 'cover',
+                objectPosition: 'center',
+                borderRadius: '20px',
+                display: 'block'
+              }} />
             </div>
           </motion.div>
         </div>
@@ -232,6 +267,130 @@ const ProjectDetails = () => {
         )}
 
       </div>
+
+      {/* Modal interactivo para repositorios privados */}
+      <AnimatePresence>
+        {isPrivateModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsPrivateModalOpen(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.75)',
+              backdropFilter: 'blur(8px)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.85, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card"
+              style={{
+                maxWidth: '500px',
+                width: '100%',
+                padding: '35px',
+                borderRadius: '24px',
+                border: '1px solid var(--accent-glow)',
+                boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+                position: 'relative'
+              }}
+            >
+              <button
+                onClick={() => setIsPrivateModalOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  background: 'none',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  padding: '5px'
+                }}
+              >
+                <X size={22} />
+              </button>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>
+                <div style={{
+                  padding: '12px',
+                  borderRadius: '16px',
+                  background: 'var(--accent-glow)',
+                  color: 'var(--accent-color)',
+                  display: 'flex'
+                }}>
+                  <Lock size={28} />
+                </div>
+                <div>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0 }}>
+                    Repositorio Privado
+                  </h3>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '600' }}>
+                    Código de cliente / Propietario
+                  </span>
+                </div>
+              </div>
+
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '30px', fontSize: '0.95rem' }}>
+                El código fuente de <strong>{project.title}</strong> se encuentra en un repositorio privado por acuerdos de confidencialidad y derechos de propiedad. Si deseas revisar el código o agendar una demostración guiada de su arquitectura, contáctame directamente.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <a
+                  href={`https://wa.me/51924461067?text=Hola%20Sebastian,%20quisiera%20solicitar%20acceso%20al%20repositorio%20de%20${encodeURIComponent(project.title)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-icon"
+                  style={{
+                    borderRadius: '12px',
+                    width: '100%',
+                    justifyContent: 'center',
+                    padding: '14px',
+                    gap: '10px',
+                    background: '#25D366',
+                    color: 'black',
+                    fontWeight: 'bold',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <FaWhatsapp size={20} /> Solicitar Acceso por WhatsApp
+                </a>
+
+                <a
+                  href={`mailto:sebastiangairthon@gmail.com?subject=Solicitud%20de%20acceso%20a%20repositorio:%20${encodeURIComponent(project.title)}`}
+                  className="social-icon"
+                  style={{
+                    borderRadius: '12px',
+                    width: '100%',
+                    justifyContent: 'center',
+                    padding: '14px',
+                    gap: '10px',
+                    background: 'rgba(255,255,255,0.08)',
+                    color: 'white',
+                    fontWeight: '600',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <Mail size={18} /> Enviar Solicitud por Correo
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
