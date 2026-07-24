@@ -14,14 +14,34 @@ const Hero = () => {
       <div className="hero-glow-2" />
 
       <div className="container">
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="hero-tag"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '10px',
+            background: 'rgba(39, 201, 63, 0.1)',
+            border: '1px solid rgba(39, 201, 63, 0.3)',
+            padding: '8px 20px',
+            borderRadius: '30px',
+            marginBottom: '25px',
+            backdropFilter: 'blur(10px)'
+          }}
         >
-          {t.hero.tag}
-        </motion.p>
+          <span style={{
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            background: '#27C93F',
+            boxShadow: '0 0 12px #27C93F',
+            display: 'inline-block'
+          }} />
+          <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#27C93F' }}>
+            {t.hero.availability}
+          </span>
+        </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

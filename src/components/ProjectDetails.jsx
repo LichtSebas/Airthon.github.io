@@ -10,6 +10,7 @@ import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
 import edanDecorImg from '../imagenes/1logo.png';
+import AudioExtractorWiki from './AudioExtractorWiki';
 
 const projectData = {
   'edam-web': {
@@ -128,14 +129,95 @@ const projectData = {
     docUrl: 'https://github.com/LichtSebas/sat-kiosco-demo'
   },
   'audio-extractor': {
-    title: 'AudioExtractor',
-    description: 'Herramienta de escritorio eficiente para extraer y convertir audio desde archivos de video.',
-    fullContent: 'AudioExtractor fue desarrollado para automatizar y simplificar la extracción de pistas de audio (MP3, WAV) a partir de archivos de video en múltiples formatos (MP4, MKV, AVI). Su enfoque principal es la rapidez, conservando la mayor fidelidad de sonido posible.',
-    tech: ['Python', 'FFmpeg', 'Tkinter/PyQt', 'Audio Processing'],
-    challenges: ['Manejo eficiente de archivos de video pesados (varios GB) sin saturar la memoria RAM.', 'Interfaz de usuario sencilla pero potente para usuarios no técnicos.'],
-    results: ['Procesamiento hasta un 30% más rápido que herramientas gratuitas genéricas.', 'Conversión exitosa de más de 20 formatos de video distintos a audio de alta calidad.'],
+    title: 'AudioExtractor Pro v3.0 (Desktop App)',
+    description: 'Aplicación de escritorio Java Swing/AWT de alto rendimiento para extracción, recorte milimétrico, edición de metadatos ID3 y procesamiento de audio por lotes con FFmpeg.',
+    fullContent: 'AudioExtractor Pro v3.0 es una potente aplicación de escritorio desarrollada en Java 17+ que automatiza el procesamiento multimedia mediante la integración directa del ejecutable FFmpeg. La aplicación permite convertir, recortar por marcas de tiempo (HH:MM:SS), ajustar niveles de volumen (+3 dB, +6 dB, -3 dB), aplicar efectos Fade In / Fade Out, editar etiquetas ID3 y procesar listas masivas por lotes sin congelar la interfaz de usuario.',
+    tech: ['Java 17+ (JDK)', 'Swing / AWT (GUI)', 'FFmpeg Core', 'ProcessBuilder CLI', 'Multi-threading', 'ID3 Tagging', 'Java Sound API', 'Batch Processing'],
+    challenges: [
+      'Ejecución asíncrona de subprocesos mediante ProcessBuilder para interactuar con FFmpeg sin congelar el hilo de renderizado Swing (Event Dispatch Thread).',
+      'Implementación de una zona Drag & Drop nativa para archivos de video e inclusión de carpetas completas.',
+      'Construcción de un reproductor nativo integrado utilizando Java Sound API (javax.sound.sampled) para escuchar previas al instante.',
+      'Gestión de colas por lotes (Batch Queue) con monitoreo en tiempo real de estados y control de errores por archivo.'
+    ],
+    results: [
+      'Soporte completo para exportación en MP3, WAV, AAC, M4A y FLAC con bitrates configurables de hasta 320 kbps.',
+      'Recorte de precisión por marca de tiempo HH:MM:SS y control de ganancia de volumen.',
+      'Formulario de metadatos ID3 (Título, Artista, Álbum, Año) con autocompletado y persistencia en historial reciente.',
+      'Script de compilación automatizado (build.bat) para generación instantánea de ejecutables distribuidos (.jar).'
+    ],
+    features: [
+      {
+        title: 'Zona Drag & Drop & Múltiples Formatos',
+        desc: 'Arrastra videos MP4, MKV, AVI, MOV o WEBM. Exporta a MP3, WAV, AAC, M4A y FLAC a 320, 192 o 128 kbps.'
+      },
+      {
+        title: 'Recorte de Tiempo & Ganancia de Volumen',
+        desc: 'Extracción por marcas de tiempo HH:MM:SS, aumento de ganancia (+3 dB / +6 dB) y efectos suaves de Fade In / Fade Out.'
+      },
+      {
+        title: 'Procesamiento por Lotes (Batch Queue)',
+        desc: 'Convierte listas masivas de archivos y carpetas en segundo plano con control de cola secuencial.'
+      },
+      {
+        title: 'Editor ID3 & Reproductor Integrado',
+        desc: 'Formulario de metadatos para canciones y mini reproductor Java Sound nativo para escuchar previas en tiempo real.'
+      }
+    ],
+    architecture: [
+      'Arquitectura modular Swing (gui/ y logic/) basada en el patrón de diseño MVC para separar la UI de la ejecución de comandos.',
+      'Subprocesos en segundo plano con captura asíncrona de flujos stdout/stderr de FFmpeg.',
+      'Sistema de gestión de temas estéticos Dark Mode 2.0 mediante StyleManager, GradientButton y CustomButton.',
+      'Reproducción de audio de baja latencia con la API nativa Java AudioSystem y Clip.'
+    ],
+    architectureFlow: [
+      {
+        step: '01',
+        title: 'Arrastre / Selección de Video',
+        subtitle: 'DragAndDropPanel / JFileChooser',
+        desc: 'Captura de eventos DropTarget para videos (MP4, MKV, AVI) o carpetas completas.',
+        icon: 'Laptop',
+        tag: 'Swing GUI Event'
+      },
+      {
+        step: '02',
+        title: 'Configuración & Recorte',
+        subtitle: 'AudioTrimPanel / MetadataPanel',
+        desc: 'Parámetros de entrada: Formato, Bitrate, marcas HH:MM:SS, Ganancia de volumen y etiquetas ID3.',
+        icon: 'Server',
+        tag: 'User Parameters'
+      },
+      {
+        step: '03',
+        title: 'Motor FFmpeg & ProcessBuilder',
+        subtitle: 'AudioExtractorLogic',
+        desc: 'Ejecución asíncrona de comandos FFmpeg en hilo secundario para mantener fluida la ventana principal.',
+        icon: 'KeyRound',
+        tag: 'ProcessBuilder CLI'
+      },
+      {
+        step: '04',
+        title: 'Salida & Player Integrado',
+        subtitle: 'PlayerPanel / HistoryPanel',
+        desc: 'Generación del archivo de audio, reproductor nativo para vista previa y botón de apertura rápida de carpeta.',
+        icon: 'Database',
+        tag: 'AudioSystem / .jar'
+      }
+    ],
+    retrospective: {
+      lessons: [
+        'Manejo avanzado de la Event Dispatch Thread (EDT) en Java Swing mediante hilos concurrentes para tareas intensivas de I/O.',
+        'Captura y parseo de salidas de subprocesos nativos del sistema con ProcessBuilder y comandos FFmpeg.',
+        'Personalización de componentes Swing para lograr un tema oscuro moderno (Dark Mode 2.0) sin frameworks de UI pesados.'
+      ],
+      roadmap: [
+        'Integración de normalización de audio basada en volumen estándar R128.',
+        'Soporte para extracción de carátulas/portadas de álbum desde el video e incrustación en metadatos ID3.',
+        'Empaquetado ejecutable nativo para Windows (.exe) e instalador independiente.'
+      ]
+    },
     image: audioExtractorImg,
-    isPrivate: false
+    isPrivate: false,
+    docUrl: 'https://github.com/LichtSebas/AudioExtractor'
   }
 };
 
@@ -157,6 +239,10 @@ const ProjectDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (id === 'audio-extractor') {
+    return <AudioExtractorWiki />;
+  }
 
   if (!project) {
     return (

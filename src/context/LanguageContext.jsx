@@ -14,6 +14,7 @@ export const translations = {
     },
     hero: {
       tag: 'Bienvenido a mi mundo digital',
+      availability: 'Disponible para Nuevas Oportunidades (Remoto / Freelance)',
       subtitlePrefix: 'Estudiante de ',
       softwareEng: 'Ingeniería de Software',
       and: ' & Programador ',
@@ -90,6 +91,7 @@ export const translations = {
     },
     hero: {
       tag: 'Welcome to my digital world',
+      availability: 'Available for New Opportunities (Remote / Freelance)',
       subtitlePrefix: 'Student of ',
       softwareEng: 'Software Engineering',
       and: ' & ',
