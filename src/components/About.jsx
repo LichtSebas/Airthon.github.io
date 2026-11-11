@@ -1,17 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import profileImg from '../imagenes/sebas.jfif';
+import profileImg from '../imagenes/sebas.webp';
 import { useLanguage } from '../context/LanguageContext';
-import { Award, Code2, Users, Sparkles } from 'lucide-react';
-
-const projects = [
-  { id: 'arca-ecosystem' },
-  { id: 'arca-news' },
-  { id: 'sat-kiosco-inteligente' },
-  { id: 'edam-web' },
-  { id: 'sorteos-plat' },
-  { id: 'audio-extractor' }
-];
+import { Code2, Sparkles } from 'lucide-react';
+import { projectsList } from '../data/projectsData';
 
 const AnimatedCounter = ({ target, suffix = '', duration = 1500 }) => {
   const [count, setCount] = useState(0);
@@ -41,7 +33,7 @@ const AnimatedCounter = ({ target, suffix = '', duration = 1500 }) => {
 
 const About = () => {
   const { t } = useLanguage();
-  const totalProjects = projects.length;
+  const totalProjects = projectsList.length;
 
   return (
     <section id="about" className="section" style={{ backgroundColor: 'var(--bg-color)' }}>
@@ -157,6 +149,7 @@ const About = () => {
               <img 
                 src={profileImg} 
                 alt="Sebastian Gonzales" 
+                decoding="async"
                 style={{ 
                   width: '100%', 
                   height: '100%', 

@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Award, Calendar, ExternalLink, X, FileText } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 import certificatesData from '../data/certificates.json';
 
 const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState(null);
+  const { lang } = useLanguage();
+  const isEs = lang === 'ES';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,102 +20,101 @@ const Certificates = () => {
       <div className="container">
         {/* Back Button */}
         <Link to="/" className="nav-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '40px' }}>
-          <ArrowLeft size={20} /> Volver al Inicio
+          <ArrowLeft size={20} /> {isEs ? 'Volver al Inicio' : 'Back to Home'}
         </Link>
 
         {/* Section Header */}
         <div className="section-header" style={{ marginBottom: '60px' }}>
-          <h2 className="section-title">Mis <span className="accent-text">Certificados</span></h2>
-          <p className="section-subtitle">Acreditaciones y certificaciones profesionales que respaldan mi formación y experiencia técnica.</p>
+          <h2 className="section-title">
+            {isEs ? 'Mis ' : 'My '}
+            <span className="accent-text">{isEs ? 'Certificados' : 'Certificates'}</span>
+          </h2>
+          <p className="section-subtitle">
+            {isEs
+              ? 'Acreditaciones y certificaciones profesionales que respaldan mi formación y experiencia técnica.'
+              : 'Professional accreditations and certifications backing my academic background and technical expertise.'}
+          </p>
         </div>
 
         {/* Certificates Grid */}
         <div className="grid-2" style={{ gap: '30px' }}>
-          {certificatesData.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card"
-              style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}
-            >
-              {/* Image Preview */}
-              <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}
-                  onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-                />
-                <div style={{
-                  position: 'absolute',
-                  top: '20px',
-                  left: '20px',
-                  background: 'rgba(10, 10, 10, 0.85)',
-                  backdropFilter: 'blur(5px)',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'white',
-                  padding: '5px 12px',
-                  borderRadius: '12px',
-                  fontSize: '0.8rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}>
-                  <Award size={14} className="accent-text" />
-                  {cert.issuer}
-                </div>
-              </div>
+          {certificatesData.map((cert, index) => {
+            const title = isEs ? cert.title : (cert.titleEn || cert.title);
+            const date = isEs ? cert.date : (cert.dateEn || cert.date);
+            const description = isEs ? cert.description : (cert.descriptionEn || cert.description);
 
-              {/* Card Content */}
-              <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '10px', lineHeight: '1.3' }}>{cert.title}</h3>
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '20px' }}>
-                  <Calendar size={14} />
-                  <span>{cert.date}</span>
-                </div>
-
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '25px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: '1.6', flexGrow: 1 }}>
-                  {cert.description}
-                </p>
-
-                {/* View Details Button */}
-                <button
-                  onClick={() => setSelectedCert(cert)}
-                  style={{
-                    alignSelf: 'flex-start',
-                    background: 'transparent',
-                    border: '1px solid var(--accent-color)',
-                    color: 'var(--accent-color)',
-                    padding: '10px 20px',
+            return (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="glass-card"
+                style={{ padding: '0', overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}
+              >
+                {/* Image Preview */}
+                <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                  <img
+                    src={cert.image}
+                    alt={title}
+                    loading="lazy"
+                    decoding="async"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' }}
+                    onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                  />
+                  <div style={{
+                    position: 'absolute',
+                    top: '20px',
+                    left: '20px',
+                    background: 'rgba(10, 10, 10, 0.85)',
+                    backdropFilter: 'blur(5px)',
+                    border: '1px solid rgba(255,255,255,0.1)',
+                    color: 'white',
+                    padding: '5px 12px',
                     borderRadius: '12px',
-                    fontSize: '0.9rem',
-                    fontWeight: '700',
-                    cursor: 'pointer',
+                    fontSize: '0.8rem',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
-                    transition: 'var(--transition)'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.background = 'var(--accent-color)';
-                    e.currentTarget.style.color = 'black';
-                    e.currentTarget.style.boxShadow = '0 0 15px var(--accent-glow)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.background = 'transparent';
-                    e.currentTarget.style.color = 'var(--accent-color)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  <FileText size={16} /> Ver más
-                </button>
-              </div>
-            </motion.div>
-          ))}
+                    gap: '8px'
+                  }}>
+                    <Award size={14} className="accent-text" />
+                    {cert.issuer}
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div style={{ padding: '2rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '10px', lineHeight: '1.3' }}>{title}</h3>
+                  
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '16px' }}>
+                    <Calendar size={14} />
+                    <span>{date}</span>
+                  </div>
+
+                  {/* Skill Chips Preview */}
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '18px' }}>
+                    {cert.skills.slice(0, 3).map((skill) => (
+                      <span key={skill} className="tech-chip">{skill}</span>
+                    ))}
+                  </div>
+
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '25px', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis', lineHeight: '1.6', flexGrow: 1 }}>
+                    {description}
+                  </p>
+
+                  {/* View Details Button */}
+                  <button
+                    onClick={() => setSelectedCert(cert)}
+                    className="btn-secondary-sm"
+                    style={{ alignSelf: 'flex-start' }}
+                  >
+                    <FileText size={16} /> {isEs ? 'Ver Detalles' : 'View Details'}
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
@@ -195,7 +197,7 @@ const Certificates = () => {
                 <div style={{ width: '100%', aspectRatio: '16/10', overflow: 'hidden', background: '#000', position: 'relative' }}>
                   <img
                     src={selectedCert.image}
-                    alt={selectedCert.title}
+                    alt={isEs ? selectedCert.title : (selectedCert.titleEn || selectedCert.title)}
                     style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                   />
                 </div>
@@ -219,19 +221,23 @@ const Certificates = () => {
                     </span>
                     <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <Calendar size={14} />
-                      {selectedCert.date}
+                      {isEs ? selectedCert.date : (selectedCert.dateEn || selectedCert.date)}
                     </span>
                   </div>
 
-                  <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '20px', lineHeight: '1.2' }}>{selectedCert.title}</h2>
+                  <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '20px', lineHeight: '1.2' }}>
+                    {isEs ? selectedCert.title : (selectedCert.titleEn || selectedCert.title)}
+                  </h2>
                   
                   <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: '1.8', marginBottom: '30px' }}>
-                    {selectedCert.description}
+                    {isEs ? selectedCert.description : (selectedCert.descriptionEn || selectedCert.description)}
                   </p>
 
                   {/* Skills tags */}
                   <div style={{ marginBottom: '35px' }}>
-                    <h4 style={{ fontSize: '0.95rem', color: 'white', fontWeight: '700', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Habilidades validadas:</h4>
+                    <h4 style={{ fontSize: '0.95rem', color: 'white', fontWeight: '700', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                      {isEs ? 'Habilidades validadas:' : 'Validated skills:'}
+                    </h4>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                       {selectedCert.skills.map((skill) => (
                         <span key={skill} style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '5px 12px', borderRadius: '8px', fontSize: '0.85rem', color: 'white' }}>
@@ -247,29 +253,9 @@ const Certificates = () => {
                       href={selectedCert.credentialUrl}
                       target="_blank"
                       rel="noreferrer"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '10px',
-                        background: 'var(--accent-color)',
-                        color: 'black',
-                        padding: '12px 25px',
-                        borderRadius: '12px',
-                        fontSize: '0.95rem',
-                        fontWeight: '700',
-                        textDecoration: 'none',
-                        transition: 'var(--transition)'
-                      }}
-                      onMouseOver={(e) => {
-                        e.currentTarget.style.transform = 'translateY(-3px)';
-                        e.currentTarget.style.boxShadow = '0 8px 20px var(--accent-glow)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.currentTarget.style.transform = 'none';
-                        e.currentTarget.style.boxShadow = 'none';
-                      }}
+                      className="btn-primary-sm"
                     >
-                      Verificar Credencial <ExternalLink size={16} />
+                      {isEs ? 'Verificar Credencial' : 'Verify Credential'} <ExternalLink size={16} />
                     </a>
                   )}
                 </div>

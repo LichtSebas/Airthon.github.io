@@ -1,11 +1,10 @@
-import React from 'react';
 import { Mail, ArrowUp } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaWhatsapp } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
-  const { t, lang } = useLanguage();
+  const { lang } = useLanguage();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -29,7 +28,9 @@ const Footer = () => {
               SG.
             </Link>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '8px', maxWidth: '380px' }}>
-              Sebastian Gonzales — Software Engineer & Founder @ A.R.C.A. PROGRAM.
+              {lang === 'ES'
+                ? 'Sebastian Gonzales — Estudiante de Ingeniería de Software & Fundador de A.R.C.A. PROGRAM.'
+                : 'Sebastian Gonzales — Software Engineering Student & Founder @ A.R.C.A. PROGRAM.'}
             </p>
           </div>
 

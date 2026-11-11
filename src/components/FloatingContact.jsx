@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
+import { useLanguage } from '../context/LanguageContext';
 
 const FloatingContact = () => {
   const [hoveredTab, setHoveredTab] = useState(null);
+  const { lang } = useLanguage();
 
   const tabs = [
     {
@@ -16,7 +17,7 @@ const FloatingContact = () => {
     },
     {
       id: 'email',
-      label: 'Correo',
+      label: lang === 'ES' ? 'Correo' : 'Email',
       icon: <Mail size={24} />,
       color: 'var(--accent-color)',
       href: 'mailto:sebastiangairthon@gmail.com'

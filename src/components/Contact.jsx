@@ -56,7 +56,7 @@ const Contact = () => {
         } else {
           throw new Error('No se pudo enviar el correo');
         }
-      } catch (error) {
+      } catch {
         setStatus('error');
         setFeedbackMsg('Ocurrió un error al enviar mediante EmailJS. Puedes escribirme directamente por WhatsApp o Email.');
       }

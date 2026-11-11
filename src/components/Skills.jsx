@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { 
   SiPython, 
@@ -6,10 +5,7 @@ import {
   SiTypescript,
   SiNodedotjs, 
   SiReact, 
-  SiMysql, 
-  SiGit, 
   SiGithub, 
-  SiFigma, 
   SiVite,
   SiPhp,
   SiPostgresql,
@@ -18,15 +14,16 @@ import {
   SiPnpm,
   SiHtml5,
   SiFramer,
-  SiDocker,
-  SiRender
+  SiDocker
 } from 'react-icons/si';
 import { FaDatabase, FaCss3Alt, FaGithub as FaGithubIcon } from 'react-icons/fa';
-import { Cpu, Layout, Terminal } from 'lucide-react';
+import { Cpu, Layout, Terminal, Award, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 
 const Skills = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const isEs = lang === 'ES';
 
   const skillGroups = [
     {
@@ -165,6 +162,59 @@ const Skills = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Certifications Highlight CTA Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="glass-card"
+          style={{
+            marginTop: '40px',
+            padding: '28px 36px',
+            borderRadius: '24px',
+            border: '1px solid rgba(255, 165, 0, 0.25)',
+            background: 'linear-gradient(135deg, rgba(255, 165, 0, 0.06) 0%, rgba(15, 15, 20, 0.85) 100%)',
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '24px'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flex: '1 1 400px' }}>
+            <div style={{
+              width: '54px',
+              height: '54px',
+              borderRadius: '16px',
+              background: 'var(--accent-glow)',
+              border: '1px solid rgba(255, 165, 0, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <Award className="accent-text" size={28} />
+            </div>
+            <div>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: '800', marginBottom: '6px', color: 'white' }}>
+                {isEs ? 'Certificaciones & Acreditaciones Oficiales' : 'Official Certifications & Accreditations'}
+              </h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', margin: 0, lineHeight: '1.5' }}>
+                {isEs
+                  ? 'Formación complementaria certificada en Gestión Ágil (SCRUM), Análisis de Datos con Power BI, Fundamentos de UX, Design Thinking y Excel Avanzado.'
+                  : 'Certified training in Agile Project Management (SCRUM), Data Analysis with Power BI, UX Fundamentals, Design Thinking, and Advanced Excel.'}
+              </p>
+            </div>
+          </div>
+
+          <Link to="/certificados" className="btn-primary-sm" style={{ flexShrink: 0 }}>
+            <Award size={16} />
+            {isEs ? 'Explorar 5 Certificados' : 'Explore 5 Certificates'}
+            <ArrowRight size={16} />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

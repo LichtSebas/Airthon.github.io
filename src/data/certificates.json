@@ -2,11 +2,17 @@
   {
     "id": "certificado_anlisis_de_datos_con_power_bi",
     "title": "Análisis de Datos con Power BI",
+    "titleEn": "Data Analysis with Power BI",
     "issuer": "Becas Grupo Romero",
     "date": "Marzo 2026",
+    "dateEn": "March 2026",
     "image": "/certificados/certificado_anlisis_de_datos_con_power_bi.png",
-    "description": "Certificación obtenida al completar exitosamente el curso de Análisis de Datos con Power BI dictado por Becas Grupo Romero.",
+    "description": "Certificación obtenida al completar exitosamente el curso de Análisis de Datos con Power BI dictado por Becas Grupo Romero, abarcando modelado de datos, dashboards interactivos y visualización ejecutiva.",
+    "descriptionEn": "Certification awarded upon successfully completing the Data Analysis with Power BI course by Becas Grupo Romero, covering data modeling, interactive dashboards, and executive visualization.",
     "skills": [
+      "Power BI",
+      "Data Modeling",
+      "Business Intelligence",
       "Becas Grupo Romero"
     ],
     "credentialUrl": ""
@@ -14,11 +20,17 @@
   {
     "id": "certificado_design_thinking",
     "title": "Design Thinking",
+    "titleEn": "Design Thinking",
     "issuer": "Becas Grupo Romero",
     "date": "Febrero 2026",
+    "dateEn": "February 2026",
     "image": "/certificados/certificado_design_thinking.png",
-    "description": "Certificación obtenida al completar exitosamente el curso de Design Thinking dictado por Becas Grupo Romero.",
+    "description": "Certificación obtenida al completar exitosamente el curso de Design Thinking dictado por Becas Grupo Romero, enfocado en empatía con el usuario, ideación y prototipado de soluciones innovadoras.",
+    "descriptionEn": "Certification awarded upon successfully completing the Design Thinking course by Becas Grupo Romero, focused on user empathy, ideation, and rapid prototyping of innovative solutions.",
     "skills": [
+      "Design Thinking",
+      "Ideación & Prototipado",
+      "Innovación Centrada en el Usuario",
       "Becas Grupo Romero"
     ],
     "credentialUrl": ""
@@ -26,11 +38,17 @@
   {
     "id": "certificado_excel_avanzado-(1)",
     "title": "Excel Avanzado",
+    "titleEn": "Advanced Excel",
     "issuer": "Becas Grupo Romero",
     "date": "Diciembre 2025",
+    "dateEn": "December 2025",
     "image": "/certificados/certificado_excel_avanzado-(1).png",
-    "description": "Certificación obtenida al completar exitosamente el curso de Excel Avanzado dictado por Becas Grupo Romero.",
+    "description": "Certificación obtenida al completar exitosamente el curso de Excel Avanzado dictado por Becas Grupo Romero, dominando funciones complejas, tablas dinámicas y automatización de reportes.",
+    "descriptionEn": "Certification awarded upon successfully completing the Advanced Excel course by Becas Grupo Romero, mastering complex formulas, pivot tables, and report automation.",
     "skills": [
+      "Excel Avanzado",
+      "Tablas Dinámicas",
+      "Análisis de Datos",
       "Becas Grupo Romero"
     ],
     "credentialUrl": ""
@@ -38,11 +56,17 @@
   {
     "id": "certificado_fundamentos_de_ux",
     "title": "Fundamentos de UX",
+    "titleEn": "UX Fundamentals",
     "issuer": "Becas Grupo Romero",
     "date": "Febrero 2026",
+    "dateEn": "February 2026",
     "image": "/certificados/certificado_fundamentos_de_ux.png",
-    "description": "Certificación obtenida al completar exitosamente el curso de Fundamentos de UX dictado por Becas Grupo Romero.",
+    "description": "Certificación obtenida al completar exitosamente el curso de Fundamentos de UX dictado por Becas Grupo Romero, aplicando principios de usabilidad, arquitectura de información y diseño de experiencias digitales.",
+    "descriptionEn": "Certification awarded upon successfully completing the UX Fundamentals course by Becas Grupo Romero, applying usability principles, information architecture, and digital experience design.",
     "skills": [
+      "UX Research",
+      "Arquitectura de Información",
+      "Usabilidad Web",
       "Becas Grupo Romero"
     ],
     "credentialUrl": ""
@@ -50,11 +74,17 @@
   {
     "id": "certificado_gestin_gil_de_proyectos_scrum",
     "title": "Gestión ágil de proyectos (SCRUM)",
+    "titleEn": "Agile Project Management (SCRUM)",
     "issuer": "Becas Grupo Romero",
     "date": "Febrero 2026",
+    "dateEn": "February 2026",
     "image": "/certificados/certificado_gestin_gil_de_proyectos_scrum.png",
-    "description": "Certificación obtenida al completar exitosamente el curso de Gestión ágil de proyectos (SCRUM) dictado por Becas Grupo Romero.",
+    "description": "Certificación obtenida al completar exitosamente el curso de Gestión ágil de proyectos (SCRUM) dictado por Becas Grupo Romero, gestionando sprints, entregables incrementales y liderazgo de equipos ágiles.",
+    "descriptionEn": "Certification awarded upon successfully completing the Agile Project Management (SCRUM) course by Becas Grupo Romero, managing sprints, incremental deliverables, and agile team leadership.",
     "skills": [
+      "Scrum Framework",
+      "Gestión Ágil",
+      "Sprint Planning",
       "Becas Grupo Romero"
     ],
     "credentialUrl": ""

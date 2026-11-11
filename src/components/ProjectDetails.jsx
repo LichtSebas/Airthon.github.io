@@ -2,361 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, ExternalLink, CheckCircle2, BookOpen, Layers, ShieldCheck, 
+  ArrowLeft, ExternalLink, CheckCircle2, Layers, ShieldCheck, 
   Cpu, Code2, Lock, X, Mail, Laptop, Server, KeyRound, Database, 
   GraduationCap, Rocket, ArrowRight, Sparkles, Workflow 
 } from 'lucide-react';
 import { FaGithub, FaWhatsapp } from 'react-icons/fa';
-import satKioscoImg from '../imagenes/SATPresention.PNG';
-import audioExtractorImg from '../imagenes/AudioExtractor.png';
-import edanDecorImg from '../imagenes/1logo.png';
-import arcaPageImg from '../imagenes/ARCAPage.png';
-import arcaNewImg from '../imagenes/ARCANEW.png';
 import AudioExtractorWiki from './AudioExtractorWiki';
-
-const projectData = {
-  'arca-ecosystem': {
-    title: 'A.R.C.A. Digital Ecosystem',
-    description: 'Ecosistema tecnológico modular diseñado para centralizar herramientas, recursos académicos e información para la comunidad de Ingeniería de Software.',
-    fullContent: 'A.R.C.A. Digital Ecosystem es una iniciativa tecnológica impulsada por A.R.C.A. PROGRAM que busca centralizar herramientas, recursos académicos, información y oportunidades en diferentes plataformas digitales interconectadas. Nace de la necesidad de construir soluciones propias para la comunidad universitaria, aprovechando el desarrollo de software como medio para democratizar el acceso al conocimiento, facilitar el aprendizaje y promover la colaboración activa entre estudiantes. Como fundador y director tecnológico, definí una arquitectura modular monorepo con Turborepo y pnpm, frontend en React y TypeScript, base de datos relacional PostgreSQL y servicios de autenticación centralizada con Supabase.',
-    tech: ['React', 'TypeScript', 'Turborepo (Monorepo)', 'pnpm Workspaces', 'Supabase Auth', 'PostgreSQL', 'CSS3 Modern UI', 'REST APIs', 'Multi-domain Architecture'],
-    challenges: [
-      'Orquestación de un Monorepo centralizado con Turborepo y pnpm que permita gestionar múltiples plataformas compartiendo paquetes y componentes de diseño sin fricciones ni duplicación de código.',
-      'Diseño de una arquitectura desacoplada para desplegar plataformas mediante dominios y subdominios independientes mientras mantienen una identidad de marca coherente.',
-      'Configuración de autenticación centralizada con Supabase para compartir sesiones seguras entre diferentes aplicaciones del ecosistema.',
-      'Establecimiento de una infraestructura escalable que permita incorporar progresivamente nuevas iniciativas como A.R.C.A. Projects, A.R.C.A. Networking y Banco de Exámenes con IA.'
-    ],
-    results: [
-      'Ecosistema digital activo con plataformas institucionales y de comunicación en producción y desarrollo.',
-      'Reducción drástica del tiempo de configuración de nuevas aplicaciones gracias a la reutilización de librerías y componentes UI compartidos en el monorepo.',
-      'Creación de un espacio real donde los estudiantes de Ingeniería de Software adquieren experiencia práctica en proyectos reales de alto nivel.'
-    ],
-    features: [
-      {
-        title: 'A.R.C.A. Main Website',
-        desc: 'Portal institucional y punto de acceso al ecosistema: comunica la misión, objetivos, iniciativas, equipo de colaboradores y soluciones tecnológicas.'
-      },
-      {
-        title: 'A.R.C.A. News',
-        desc: 'Plataforma digital de noticias y comunicación estudiantil con experiencia editorial contemporánea, eventos, convocatorias y avisos destacados.'
-      },
-      {
-        title: 'A.R.C.A. Banco de Exámenes (IA)',
-        desc: 'Plataforma de recursos académicos y repositorio de evaluaciones guiado por modelos de inteligencia artificial para potenciar el estudio.'
-      },
-      {
-        title: 'Arquitectura Monorepo & Subdominios',
-        desc: 'Infraestructura modular preparada para incorporar nuevas herramientas y plataformas de forma independiente sin comprometer el núcleo del ecosistema.'
-      }
-    ],
-    architecture: [
-      'Estructura Monorepo gestionada con Turborepo y pnpm para optimizar builds y compartir librerías UI.',
-      'Frontend moderno desarrollado en React y TypeScript con principios de diseño de alta fidelidad.',
-      'Backend y autenticación centralizada mediante Supabase y PostgreSQL con políticas de seguridad RLS.',
-      'Despliegue multizona y modular a través de dominios y subdominios independientes.'
-    ],
-    architectureFlow: [
-      {
-        step: '01',
-        title: 'Orquestación & Monorepo',
-        subtitle: 'Turborepo + pnpm Workspaces',
-        desc: 'Estructura centralizada de repositorios, scripts compartidos y dependencias optimizadas para alto rendimiento en desarrollo.',
-        icon: 'Workflow',
-        tag: 'Monorepo'
-      },
-      {
-        step: '02',
-        title: 'Frontend & UI Modular',
-        subtitle: 'React 19 + TypeScript',
-        desc: 'Aplicaciones desacopladas (Portal, News, Recursos) que consumen componentes de interfaz compartidos.',
-        icon: 'Laptop',
-        tag: 'React / TS'
-      },
-      {
-        step: '03',
-        title: 'Capa de Servicios & Auth',
-        subtitle: 'Supabase REST & Auth',
-        desc: 'Servicios transversales de autenticación segura, control de acceso y gestión de sesiones entre plataformas.',
-        icon: 'KeyRound',
-        tag: 'Supabase'
-      },
-      {
-        step: '04',
-        title: 'Base de Datos Centralizada',
-        subtitle: 'PostgreSQL Relacional',
-        desc: 'Almacenamiento persistente para contenidos, noticias, recursos estudiantiles y trazabilidad de eventos.',
-        icon: 'Database',
-        tag: 'PostgreSQL'
-      }
-    ],
-    retrospective: {
-      lessons: [
-        'La implementación temprana de un Monorepo con Turborepo y pnpm ahorra semanas de esfuerzo en la estandarización de componentes y estilos.',
-        'La arquitectura basada en subdominios independientes permite iterar en cada plataforma sin riesgos de regresión en las demás.',
-        'Construir una iniciativa comunitaria requiere tanto liderazgo humano como bases técnicas sólidas y bien documentadas.'
-      ]
-    },
-    image: arcaPageImg,
-    isPrivate: false,
-    demoUrl: 'https://www.arca-program.com/',
-    demoLabel: 'Visitar Plataforma Web'
-  },
-  'arca-news': {
-    title: 'A.R.C.A. News',
-    description: 'Plataforma digital de noticias y comunicación estudiantil con experiencia editorial moderna, cobertura de eventos y avisos institucionales.',
-    fullContent: 'A.R.C.A. News es una plataforma de comunicación digital desarrollada para centralizar y difundir información relevante para la comunidad universitaria. Su propósito es ofrecer un espacio donde los estudiantes puedan mantenerse informados sobre noticias, eventos, actividades, iniciativas y novedades de A.R.C.A. PROGRAM y el entorno de la ingeniería de software. La interfaz ofrece una experiencia editorial moderna, priorizando la presentación de noticias destacadas, artículos de divulgación tecnológica y avisos importantes.',
-    tech: ['React', 'TypeScript', 'Supabase', 'CSS3 (Editorial Layout)', 'Responsive Design', 'Framer Motion'],
-    challenges: [
-      'Diseño de una cuadrícula editorial dinámica y adaptable que destaque noticias principales sin saturar al usuario.',
-      'Organización de publicaciones por categorías temáticas (talleres, convocatorias, tecnología y vida universitaria).',
-      'Optimización de tiempos de carga en dispositivos móviles para facilitar la lectura rápida en el campus.'
-    ],
-    results: [
-      'Canal oficial de información con alta legibilidad y navegación orientada al descubrimiento de contenidos.',
-      'Mayor participación y visibilidad de los proyectos y talleres impulsados por la asociación.',
-      'Identidad visual moderna perfectamente integrada con los lineamientos gráficos de A.R.C.A.'
-    ],
-    features: [
-      {
-        title: 'Portada Editorial & Artículos Destacados',
-        desc: 'Módulo principal con titulares dinámicos, noticias destacadas y presentación visual de alto impacto.'
-      },
-      {
-        title: 'Agenda de Eventos y Talleres',
-        desc: 'Sección especializada para el anuncio de webinars, hackathones y sesiones de aprendizaje colaborativo.'
-      },
-      {
-        title: 'Sistema de Avisos Destacados',
-        desc: 'Alertas prioritarias en la interfaz para comunicar novedades institucionales urgentes a la comunidad.'
-      },
-      {
-        title: 'Categorización & Búsqueda Rápida',
-        desc: 'Filtros ágiles para descubrir artículos técnicos, novedades de proyectos y comunicados oficiales.'
-      }
-    ],
-    architecture: [
-      'Frontend en React y TypeScript con maquetación editorial responsiva.',
-      'Integración con la capa de datos de Supabase para publicación y actualización de notas.',
-      'Animaciones y transiciones de lectura fluidas con Framer Motion.'
-    ],
-    retrospective: {
-      lessons: [
-        'Una tipografía cuidada y un espaciado equilibrado marcan la diferencia en plataformas de lectura digital.',
-        'La jerarquía visual con titulares destacados incrementa el engagement del estudiante con las noticias.'
-      ]
-    },
-    image: arcaNewImg,
-    isPrivate: false,
-    demoUrl: 'https://news.arca-program.com/',
-    demoLabel: 'Visitar A.R.C.A. News'
-  },
-  'edam-web': {
-    title: 'EdanDecor Mueblería E-commerce',
-    description: 'Plataforma e-commerce fullstack para exhibición, gestión e inventario de muebles con catálogo desacoplado y arquitectura modular.',
-    fullContent: 'EdanDecor nació de la necesidad de digitalizar la experiencia de compra de muebles, combinando una interfaz elegante y accesible con una arquitectura backend robusta basada en PHP nativo y PostgreSQL (alojado en Supabase). La plataforma resolvió el reto de exhibir variantes complejas de muebles (muestras de color Hexadecimal, dimensiones, materiales) y asegurar las transacciones mediante un sistema de autenticación seguro de doble flujo y protección Anti-CSRF.',
-    tech: ['PHP 8 Nativo', 'PostgreSQL (Supabase)', 'Docker', 'Render', 'JavaScript (Fetch API / AJAX)', 'Supabase Auth', 'CSS3 (Mobile-First)', 'PDO'],
-    challenges: [
-      'Implementación de un catálogo 100% responsive a ancho completo con filtro lateral fijo y muestras de color en códigos Hexadecimales reales.',
-      'Construcción de un flujo de autenticación seguro integrando Supabase Auth REST API con código OTP de 8 dígitos y Magic Links de 1 solo clic.',
-      'Optimización de la experiencia de compra mediante carrito dinámico procesado en segundo plano con Fetch API / AJAX sin recargas de página.',
-      'Garantizar la seguridad del servidor mediante protección Anti-CSRF tokenizada de 32 bytes y consultas preparadas PDO contra inyección SQL.'
-    ],
-    results: [
-      'Despliegue automatizado en producción con contenedor Docker parametrizado en Render.',
-      'Arquitectura segura libre de inyecciones SQL, ataques CSRF y secuestro de sesiones.',
-      'Integración directa de cotizaciones rápidas a WhatsApp desde el Showcase / Modal de Vista Rápida.',
-      'Panel de Staff/Administración integral (`admin/panel.php`) para control de catálogo CRUD, stock, órdenes de compra y comentarios.'
-    ],
-    features: [
-      {
-        title: 'Catálogo & Modal Showcase',
-        desc: 'Filtros por categoría, precio y muestras circulares de color Hexadecimal. Vista Rápida con ficha técnica sin recortes de imagen y cotización directa a WhatsApp.'
-      },
-      {
-        title: 'Carrito de Compras Asíncrono',
-        desc: 'Modificación de cantidades, recálculo de subtotales y eliminación de productos mediante Fetch API (AJAX) sin refrescar la página.'
-      },
-      {
-        title: 'Panel de Administración Staff',
-        desc: 'Gestión CRUD de muebles, edición de paletas Hexadecimales, actualización de stock, cambio de estado de pedidos y moderación de testimonios.'
-      },
-      {
-        title: 'Doble Flujo de Autenticación',
-        desc: 'Registro seguro en Supabase Auth, verificación por código OTP de 8 dígitos con temporizador y Magic Link para inicio de sesión inmediato.'
-      }
-    ],
-    architecture: [
-      'Backend en PHP nativo con patrón de diseño modular (`includes/`, `admin/`, `database/`).',
-      'Base de datos PostgreSQL en Supabase con Prepared Statements PDO y Triggers de validación.',
-      'Despliegue contenerizado en Docker parametrizado mediante variables de entorno (`.env`).',
-      'Protección Anti-CSRF (tokens de 32 bytes) y cookies de sesión seguras (`HttpOnly`, `SameSite=Lax`).'
-    ],
-    architectureFlow: [
-      {
-        step: '01',
-        title: 'Cliente / UI (Navegador)',
-        subtitle: 'Vanilla JS + Fetch API + CSS3',
-        desc: 'Interfaz responsive desacoplada. Peticiones AJAX asíncronas con envío de tokens Anti-CSRF de 32 bytes en cada interacción.',
-        icon: 'Laptop',
-        tag: 'HTTPS / JSON'
-      },
-      {
-        step: '02',
-        title: 'Backend en Render (Docker)',
-        subtitle: 'PHP 8 Nativo + PDO Controllers',
-        desc: 'Procesamiento modular, sanitización de entradas de usuario, lógica del carrito y gestión de sesiones seguras.',
-        icon: 'Server',
-        tag: 'PDO Prepared'
-      },
-      {
-        step: '03',
-        title: 'Supabase Auth API',
-        subtitle: 'REST API + SMTP Mailer',
-        desc: 'Gestión cifrada de contraseñas, generación de códigos OTP de 8 dígitos y verificación automática por Magic Links.',
-        icon: 'KeyRound',
-        tag: 'OTP / Magic Links'
-      },
-      {
-        step: '04',
-        title: 'PostgreSQL DB (Supabase)',
-        subtitle: 'PostgreSQL 15 + Triggers SQL',
-        desc: 'Persistencia del catálogo, paletas Hexadecimales, inventario, carritos permanentes y restricciones por Triggers.',
-        icon: 'Database',
-        tag: 'PostgreSQL'
-      }
-    ],
-    retrospective: {
-      lessons: [
-        'Integración fluida de la REST API de Supabase Auth en un entorno PHP Nativo sin utilizar SDKs pesados de terceros.',
-        'Desacoplamiento efectivo de la vista de catálogo a 100% de ancho con filtro lateral fijo de 260px en CSS Vanilla.',
-        'Diseño de seguridad multicapa con tokens Anti-CSRF de 32 bytes y parametrización mediante Docker/Render.'
-      ],
-      roadmap: [
-        'Integración de pasarela de pago directa (MercadoPago / Yape / Plin) dentro del proceso de checkout.',
-        'Implementación de sistema de caché con Redis para optimizar el rendimiento del catálogo en picos de alta demanda.',
-        'Envío automatizado de comprobantes y alertas de pedido mediante la API oficial de WhatsApp Business.'
-      ]
-    },
-    image: edanDecorImg,
-    imageFit: 'contain',
-    isPrivate: true,
-    demoUrl: 'https://tienda-muebles-7hft.onrender.com/index.php',
-    docUrl: 'https://github.com/LichtSebas/tienda-muebles'
-  },
-  'sorteos-plat': {
-    title: 'Plataforma de Sorteos',
-    description: 'Sistema automatizado para la realización de sorteos transparentes y seguros.',
-    fullContent: 'Desarrollé un algoritmo de aleatoriedad verificable y una interfaz intuitiva para que los usuarios puedan participar y ver resultados en tiempo real.',
-    tech: ['JavaScript', 'Node.js', 'PostgreSQL', 'Framer Motion'],
-    challenges: ['Seguridad contra scripts de participación automática.', 'Manejo de picos de tráfico durante los sorteos.'],
-    results: ['Más de 500 sorteos realizados con éxito.', 'Cero incidencias de seguridad reportadas.'],
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop',
-    isPrivate: false
-  },
-  'sat-kiosco-inteligente': {
-    title: 'SAT Kiosco',
-    description: 'Kiosco digital para facilitar los trámites tributarios a adultos mayores.',
-    fullContent: 'El proyecto "SAT Kiosco" surge de la necesidad de cerrar la brecha digital en la atención al público adulto mayor. Se diseñó una interfaz interactiva y amigable que simplifica procesos complejos, pagos y consultas, reduciendo la fricción y el tiempo de espera en ventanillas.',
-    tech: ['React', 'Figma', 'UX/UI Design', 'Accesibilidad'],
-    challenges: ['Diseñar una interfaz altamente intuitiva para usuarios con poca experiencia digital.', 'Integración fluida con los sistemas heredados de la institución tributaria.'],
-    results: ['Reducción del 50% en los tiempos de espera presencial.', 'Altos índices de satisfacción reportados por usuarios mayores de 60 años.'],
-    image: satKioscoImg,
-    isPrivate: false,
-    demoUrl: 'https://lichtsebas.github.io/sat-kiosco-demo/',
-    docUrl: 'https://github.com/LichtSebas/sat-kiosco-demo'
-  },
-  'audio-extractor': {
-    title: 'AudioExtractor Pro v3.0 (Desktop App)',
-    description: 'Aplicación de escritorio Java Swing/AWT de alto rendimiento para extracción, recorte milimétrico, edición de metadatos ID3 y procesamiento de audio por lotes con FFmpeg.',
-    fullContent: 'AudioExtractor Pro v3.0 es una potente aplicación de escritorio desarrollada en Java 17+ que automatiza el procesamiento multimedia mediante la integración directa del ejecutable FFmpeg. La aplicación permite convertir, recortar por marcas de tiempo (HH:MM:SS), ajustar niveles de volumen (+3 dB, +6 dB, -3 dB), aplicar efectos Fade In / Fade Out, editar etiquetas ID3 y procesar listas masivas por lotes sin congelar la interfaz de usuario.',
-    tech: ['Java 17+ (JDK)', 'Swing / AWT (GUI)', 'FFmpeg Core', 'ProcessBuilder CLI', 'Multi-threading', 'ID3 Tagging', 'Java Sound API', 'Batch Processing'],
-    challenges: [
-      'Ejecución asíncrona de subprocesos mediante ProcessBuilder para interactuar con FFmpeg sin congelar el hilo de renderizado Swing (Event Dispatch Thread).',
-      'Implementación de una zona Drag & Drop nativa para archivos de video e inclusión de carpetas completas.',
-      'Construcción de un reproductor nativo integrado utilizando Java Sound API (javax.sound.sampled) para escuchar previas al instante.',
-      'Gestión de colas por lotes (Batch Queue) con monitoreo en tiempo real de estados y control de errores por archivo.'
-    ],
-    results: [
-      'Soporte completo para exportación en MP3, WAV, AAC, M4A y FLAC con bitrates configurables de hasta 320 kbps.',
-      'Recorte de precisión por marca de tiempo HH:MM:SS y control de ganancia de volumen.',
-      'Formulario de metadatos ID3 (Título, Artista, Álbum, Año) con autocompletado y persistencia en historial reciente.',
-      'Script de compilación automatizado (build.bat) para generación instantánea de ejecutables distribuidos (.jar).'
-    ],
-    features: [
-      {
-        title: 'Zona Drag & Drop & Múltiples Formatos',
-        desc: 'Arrastra videos MP4, MKV, AVI, MOV o WEBM. Exporta a MP3, WAV, AAC, M4A y FLAC a 320, 192 o 128 kbps.'
-      },
-      {
-        title: 'Recorte de Tiempo & Ganancia de Volumen',
-        desc: 'Extracción por marcas de tiempo HH:MM:SS, aumento de ganancia (+3 dB / +6 dB) y efectos suaves de Fade In / Fade Out.'
-      },
-      {
-        title: 'Procesamiento por Lotes (Batch Queue)',
-        desc: 'Convierte listas masivas de archivos y carpetas en segundo plano con control de cola secuencial.'
-      },
-      {
-        title: 'Editor ID3 & Reproductor Integrado',
-        desc: 'Formulario de metadatos para canciones y mini reproductor Java Sound nativo para escuchar previas en tiempo real.'
-      }
-    ],
-    architecture: [
-      'Arquitectura modular Swing (gui/ y logic/) basada en el patrón de diseño MVC para separar la UI de la ejecución de comandos.',
-      'Subprocesos en segundo plano con captura asíncrona de flujos stdout/stderr de FFmpeg.',
-      'Sistema de gestión de temas estéticos Dark Mode 2.0 mediante StyleManager, GradientButton y CustomButton.',
-      'Reproducción de audio de baja latencia con la API nativa Java AudioSystem y Clip.'
-    ],
-    architectureFlow: [
-      {
-        step: '01',
-        title: 'Arrastre / Selección de Video',
-        subtitle: 'DragAndDropPanel / JFileChooser',
-        desc: 'Captura de eventos DropTarget para videos (MP4, MKV, AVI) o carpetas completas.',
-        icon: 'Laptop',
-        tag: 'Swing GUI Event'
-      },
-      {
-        step: '02',
-        title: 'Configuración & Recorte',
-        subtitle: 'AudioTrimPanel / MetadataPanel',
-        desc: 'Parámetros de entrada: Formato, Bitrate, marcas HH:MM:SS, Ganancia de volumen y etiquetas ID3.',
-        icon: 'Server',
-        tag: 'User Parameters'
-      },
-      {
-        step: '03',
-        title: 'Motor FFmpeg & ProcessBuilder',
-        subtitle: 'AudioExtractorLogic',
-        desc: 'Ejecución asíncrona de comandos FFmpeg en hilo secundario para mantener fluida la ventana principal.',
-        icon: 'KeyRound',
-        tag: 'ProcessBuilder CLI'
-      },
-      {
-        step: '04',
-        title: 'Salida & Player Integrado',
-        subtitle: 'PlayerPanel / HistoryPanel',
-        desc: 'Generación del archivo de audio, reproductor nativo para vista previa y botón de apertura rápida de carpeta.',
-        icon: 'Database',
-        tag: 'AudioSystem / .jar'
-      }
-    ],
-    retrospective: {
-      lessons: [
-        'Manejo avanzado de la Event Dispatch Thread (EDT) en Java Swing mediante hilos concurrentes para tareas intensivas de I/O.',
-        'Captura y parseo de salidas de subprocesos nativos del sistema con ProcessBuilder y comandos FFmpeg.',
-        'Personalización de componentes Swing para lograr un tema oscuro moderno (Dark Mode 2.0) sin frameworks de UI pesados.'
-      ],
-      roadmap: [
-        'Integración de normalización de audio basada en volumen estándar R128.',
-        'Soporte para extracción de carátulas/portadas de álbum desde el video e incrustación en metadatos ID3.',
-        'Empaquetado ejecutable nativo para Windows (.exe) e instalador independiente.'
-      ]
-    },
-    image: audioExtractorImg,
-    isPrivate: false,
-    docUrl: 'https://github.com/LichtSebas/AudioExtractor'
-  }
-};
+import { projectsList } from '../data/projectsData';
+import { useLanguage } from '../context/LanguageContext';
 
 const renderFlowIcon = (iconName) => {
   switch (iconName) {
@@ -371,28 +24,33 @@ const renderFlowIcon = (iconName) => {
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const project = projectData[id];
+  const { lang } = useLanguage();
   const [isPrivateModalOpen, setIsPrivateModalOpen] = useState(false);
+
+  const projectItem = projectsList.find((p) => p.id === id);
+  const content = projectItem ? (projectItem[lang] || projectItem.ES) : null;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   if (id === 'audio-extractor') {
     return <AudioExtractorWiki />;
   }
 
-  if (!project) {
+  if (!projectItem || !content) {
     return (
       <div className="section" style={{ minHeight: '80vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <h2 className="section-title">Proyecto no encontrado</h2>
-        <Link to="/" className="accent-text" style={{ textDecoration: 'none', marginTop: '20px' }}>Volver al inicio</Link>
+        <h2 className="section-title">{lang === 'ES' ? 'Proyecto no encontrado' : 'Project not found'}</h2>
+        <Link to="/" className="accent-text" style={{ textDecoration: 'none', marginTop: '20px' }}>
+          {lang === 'ES' ? 'Volver al inicio' : 'Back to home'}
+        </Link>
       </div>
     );
   }
 
   const handleRepoClick = (e) => {
-    if (project.isPrivate) {
+    if (projectItem.isPrivate) {
       e.preventDefault();
       setIsPrivateModalOpen(true);
     }
@@ -406,8 +64,8 @@ const ProjectDetails = () => {
       style={{ paddingTop: '150px' }}
     >
       <div className="container">
-        <Link to="/" className="nav-link" style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '40px' }}>
-          <ArrowLeft size={20} /> Volver a Proyectos
+        <Link to="/#projects" className="nav-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '40px' }}>
+          <ArrowLeft size={20} /> {lang === 'ES' ? 'Volver a Proyectos' : 'Back to Projects'}
         </Link>
 
         <div className="grid-2">
@@ -416,13 +74,15 @@ const ProjectDetails = () => {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <h1 className="hero-title" style={{ fontSize: '3rem', textAlign: 'left', lineHeight: '1.2' }}>{project.title}</h1>
-            <p className="hero-subtitle" style={{ textAlign: 'left', marginBottom: '30px' }}>{project.description}</p>
+            <h1 className="hero-title" style={{ fontSize: '3rem', textAlign: 'left', lineHeight: '1.2' }}>{content.title}</h1>
+            <p className="hero-subtitle" style={{ textAlign: 'left', margin: '0 0 30px 0' }}>{content.description}</p>
             
             <div style={{ marginBottom: '40px' }}>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '15px' }}>Tecnologías Utilizadas</h3>
+              <h3 style={{ fontSize: '1.2rem', fontWeight: '700', marginBottom: '15px' }}>
+                {lang === 'ES' ? 'Tecnologías Utilizadas' : 'Technologies Used'}
+              </h3>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                {project.tech.map(t => (
+                {content.tech.map(t => (
                   <span key={t} style={{ padding: '8px 16px', background: 'var(--accent-glow)', borderRadius: '10px', color: 'var(--accent-color)', fontWeight: '600', fontSize: '0.9rem' }}>
                     {t}
                   </span>
@@ -431,22 +91,24 @@ const ProjectDetails = () => {
             </div>
 
             <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
-              {project.demoUrl && (
-                <a href={project.demoUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', background: 'var(--accent-color)', color: 'black', fontWeight: 'bold', textDecoration: 'none' }}>
-                  {project.demoLabel || 'Ver Web en Vivo'} <ExternalLink size={18} />
+              {projectItem.demoUrl && (
+                <a href={projectItem.demoUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', background: 'var(--accent-color)', color: 'black', fontWeight: 'bold', textDecoration: 'none' }}>
+                  {content.demoLabel || (lang === 'ES' ? 'Ver Web en Vivo' : 'View Live Website')} <ExternalLink size={18} />
                 </a>
               )}
-              {project.docUrl && (
+              {projectItem.docUrl && (
                 <a
-                  href={project.isPrivate ? '#' : project.docUrl}
-                  target={project.isPrivate ? '_self' : '_blank'}
+                  href={projectItem.isPrivate ? '#' : projectItem.docUrl}
+                  target={projectItem.isPrivate ? '_self' : '_blank'}
                   rel="noreferrer"
                   onClick={handleRepoClick}
                   className="social-icon"
                   style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', textDecoration: 'none', cursor: 'pointer' }}
                 >
-                  {project.isPrivate ? 'Repositorio Privado' : 'Repositorio GitHub'}{' '}
-                  {project.isPrivate ? <Lock size={18} className="accent-text" /> : <FaGithub size={18} />}
+                  {projectItem.isPrivate 
+                    ? (lang === 'ES' ? 'Repositorio Privado' : 'Private Repository') 
+                    : (lang === 'ES' ? 'Repositorio GitHub' : 'GitHub Repository')}{' '}
+                  {projectItem.isPrivate ? <Lock size={18} className="accent-text" /> : <FaGithub size={18} />}
                 </a>
               )}
             </div>
@@ -458,17 +120,17 @@ const ProjectDetails = () => {
             transition={{ delay: 0.3 }}
           >
             <div className="glass-card" style={{
-              padding: project.imageFit === 'contain' ? '3rem 2rem' : '10px',
+              padding: projectItem.imageFit === 'contain' ? '3rem 2rem' : '10px',
               borderRadius: '30px',
-              backgroundColor: project.imageFit === 'contain' ? '#0d0d11' : 'transparent',
+              backgroundColor: projectItem.imageFit === 'contain' ? '#0d0d11' : 'transparent',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
             }}>
-              <img src={project.image} alt={project.title} style={{
+              <img src={projectItem.image} alt={content.title} decoding="async" style={{
                 width: '100%',
-                maxHeight: '320px',
-                objectFit: project.imageFit || 'cover',
+                maxHeight: '340px',
+                objectFit: projectItem.imageFit || 'cover',
                 objectPosition: 'center',
                 borderRadius: '20px',
                 display: 'block'
@@ -478,16 +140,16 @@ const ProjectDetails = () => {
         </div>
 
         {/* Desafío y Resultados */}
-        <div className="grid-2" style={{ marginTop: '80px', gap: '40px' }}>
+        <div className="grid-2" style={{ marginTop: '80px', gap: '40px', alignItems: 'stretch' }}>
           <div className="glass-card">
             <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Code2 className="accent-text" size={26} /> El Desafío Técnico
+              <Code2 className="accent-text" size={26} /> {lang === 'ES' ? 'El Desafío Técnico' : 'The Technical Challenge'}
             </h3>
             <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '30px' }}>
-              {project.fullContent}
+              {content.fullContent}
             </p>
             <ul style={{ listStyle: 'none', padding: 0 }}>
-              {project.challenges.map((c, i) => (
+              {content.challenges.map((c, i) => (
                 <li key={i} style={{ display: 'flex', gap: '15px', marginBottom: '15px', color: 'var(--text-secondary)' }}>
                   <span className="accent-text" style={{ marginTop: '4px' }}>→</span> {c}
                 </li>
@@ -495,32 +157,37 @@ const ProjectDetails = () => {
             </ul>
           </div>
 
-          <div className="glass-card" style={{ borderLeft: '4px solid var(--accent-color)' }}>
+          <div className="glass-card">
             <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <CheckCircle2 className="accent-text" size={26} /> Resultados e Impacto
+              <CheckCircle2 className="accent-text" size={26} /> {lang === 'ES' ? 'Resultados e Impacto' : 'Results & Impact'}
             </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              {project.results.map((r, i) => (
-                <div key={i} style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-                  <CheckCircle2 className="accent-text" size={22} style={{ flexShrink: 0 }} />
-                  <p style={{ fontWeight: '500', color: 'var(--text-color)' }}>{r}</p>
-                </div>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '30px' }}>
+              {lang === 'ES'
+                ? 'La implementación final superó las expectativas iniciales, logrando métricas clave de rendimiento, escalabilidad y satisfacción de usuario:'
+                : 'The final implementation exceeded initial expectations, achieving key metrics in performance, scalability, and user satisfaction:'}
+            </p>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {content.results.map((r, i) => (
+                <li key={i} style={{ display: 'flex', gap: '15px', marginBottom: '20px', alignItems: 'flex-start' }}>
+                  <CheckCircle2 className="accent-text" size={20} style={{ flexShrink: 0, marginTop: '3px' }} />
+                  <span style={{ fontSize: '1.05rem', fontWeight: '500' }}>{r}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
 
-        {/* IDEA 4: Diagrama de Arquitectura & Flujo de Datos Interactivo */}
-        {project.architectureFlow && (
+        {/* Diagrama Visual de Arquitectura (Flujo de Datos) */}
+        {content.architectureFlow && (
           <div style={{ marginTop: '80px' }}>
-            <div className="section-header" style={{ textAlign: 'left', marginBottom: '40px' }}>
-              <h2 className="section-title" style={{ fontSize: '2.2rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Workflow className="accent-text" size={32} /> Diagrama de Arquitectura & Flujo de Datos
-              </h2>
-              <p className="section-subtitle" style={{ textAlign: 'left', margin: '10px 0 0 0' }}>
-                Mapeo interactivo del recorrido de datos desde el navegador hasta los servicios cloud.
-              </p>
-            </div>
+            <h2 className="section-title" style={{ fontSize: '2.2rem', textAlign: 'left', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <Workflow className="accent-text" size={30} /> {lang === 'ES' ? 'Arquitectura del Sistema (Flujo de Datos)' : 'System Architecture (Data Flow)'}
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', marginBottom: '35px', fontSize: '1rem' }}>
+              {lang === 'ES'
+                ? 'Representación interactiva de las capas tecnológicas y cómo viaja la información de extremo a extremo.'
+                : 'Interactive representation of the technology layers and how data flows end-to-end.'}
+            </p>
 
             <div style={{
               display: 'grid',
@@ -528,7 +195,7 @@ const ProjectDetails = () => {
               gap: '20px',
               position: 'relative'
             }}>
-              {project.architectureFlow.map((node, i) => (
+              {content.architectureFlow.map((node, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -545,16 +212,6 @@ const ProjectDetails = () => {
                     justifyContent: 'space-between',
                     border: '1px solid rgba(255, 255, 255, 0.08)',
                     transition: 'all 0.3s ease'
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-5px)';
-                    e.currentTarget.style.borderColor = 'var(--accent-color)';
-                    e.currentTarget.style.boxShadow = '0 12px 30px var(--accent-glow)';
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = 'none';
-                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)';
-                    e.currentTarget.style.boxShadow = 'none';
                   }}
                 >
                   <div>
@@ -575,7 +232,7 @@ const ProjectDetails = () => {
                         padding: '4px 10px',
                         borderRadius: '10px'
                       }}>
-                        Paso {node.step}
+                        {lang === 'ES' ? `Paso ${node.step}` : `Step ${node.step}`}
                       </span>
                     </div>
 
@@ -596,13 +253,13 @@ const ProjectDetails = () => {
                     paddingTop: '12px',
                     borderTop: '1px solid rgba(255, 255, 255, 0.05)',
                     display: 'flex',
-                    justify: 'space-between',
+                    justifyContent: 'space-between',
                     alignItems: 'center'
                   }}>
                     <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600' }}>
                       {node.tag}
                     </span>
-                    {i < project.architectureFlow.length - 1 && (
+                    {i < content.architectureFlow.length - 1 && (
                       <ArrowRight className="accent-text" size={16} style={{ opacity: 0.8 }} />
                     )}
                   </div>
@@ -612,14 +269,14 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        {/* Sección Wiki: Funcionalidades Clave */}
-        {project.features && (
+        {/* Funcionalidades Clave */}
+        {content.features && (
           <div style={{ marginTop: '80px' }}>
             <h2 className="section-title" style={{ fontSize: '2.2rem', textAlign: 'left', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Layers className="accent-text" size={30} /> Funcionalidades Clave
+              <Layers className="accent-text" size={30} /> {lang === 'ES' ? 'Funcionalidades Clave' : 'Key Features'}
             </h2>
-            <div className="grid-2" style={{ gap: '30px' }}>
-              {project.features.map((feat, i) => (
+            <div className="grid-2" style={{ gap: '30px', alignItems: 'stretch' }}>
+              {content.features.map((feat, i) => (
                 <div key={i} className="glass-card" style={{ padding: '25px' }}>
                   <h4 style={{ fontSize: '1.2rem', fontWeight: '700', color: 'var(--accent-color)', marginBottom: '10px' }}>
                     {feat.title}
@@ -633,15 +290,15 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        {/* Sección Wiki: Arquitectura y Seguridad */}
-        {project.architecture && (
+        {/* Arquitectura y Seguridad */}
+        {content.architecture && (
           <div style={{ marginTop: '80px' }}>
             <div className="glass-card" style={{ background: 'var(--card-bg)', border: '1px solid var(--accent-glow)', padding: '40px' }}>
               <h2 style={{ fontSize: '1.8rem', fontWeight: '800', marginBottom: '25px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <ShieldCheck className="accent-text" size={28} /> Arquitectura & Medidas de Seguridad
+                <ShieldCheck className="accent-text" size={28} /> {lang === 'ES' ? 'Arquitectura & Medidas de Seguridad' : 'Architecture & Security Measures'}
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                {project.architecture.map((item, i) => (
+                {content.architecture.map((item, i) => (
                   <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
                     <Cpu className="accent-text" size={20} style={{ flexShrink: 0, marginTop: '3px' }} />
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '0.95rem' }}>{item}</p>
@@ -652,18 +309,18 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        {/* Lecciones Aprendidas & Retrospectiva (Roadmap V2) */}
-        {project.retrospective && (
+        {/* Lecciones Aprendidas & Retrospectiva */}
+        {content.retrospective && (
           <div style={{ marginTop: '80px', marginBottom: '40px' }}>
-            <div className={project.retrospective.roadmap && project.retrospective.roadmap.length > 0 ? "grid-2" : ""} style={{ gap: '40px' }}>
+            <div className={content.retrospective.roadmap && content.retrospective.roadmap.length > 0 ? "grid-2" : ""} style={{ gap: '40px', alignItems: 'stretch' }}>
               {/* Lecciones Aprendidas */}
-              {project.retrospective.lessons && (
+              {content.retrospective.lessons && (
                 <div className="glass-card" style={{ padding: '30px' }}>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <GraduationCap className="accent-text" size={26} /> Lecciones Aprendidas
+                    <GraduationCap className="accent-text" size={26} /> {lang === 'ES' ? 'Lecciones Aprendidas' : 'Lessons Learned'}
                   </h3>
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                    {project.retrospective.lessons.map((lesson, idx) => (
+                    {content.retrospective.lessons.map((lesson, idx) => (
                       <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
                         <Sparkles className="accent-text" size={18} style={{ flexShrink: 0, marginTop: '3px' }} />
                         <span>{lesson}</span>
@@ -674,13 +331,13 @@ const ProjectDetails = () => {
               )}
 
               {/* Roadmap V2.0 */}
-              {project.retrospective.roadmap && project.retrospective.roadmap.length > 0 && (
+              {content.retrospective.roadmap && content.retrospective.roadmap.length > 0 && (
                 <div className="glass-card" style={{ padding: '30px', borderLeft: '4px solid var(--accent-color)' }}>
                   <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Rocket className="accent-text" size={26} /> Próximas Mejoras (Roadmap V2.0)
+                    <Rocket className="accent-text" size={26} /> {lang === 'ES' ? 'Próximas Mejoras (Roadmap V2.0)' : 'Future Improvements (Roadmap V2.0)'}
                   </h3>
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                    {project.retrospective.roadmap.map((item, idx) => (
+                    {content.retrospective.roadmap.map((item, idx) => (
                       <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', alignItems: 'flex-start' }}>
                         <span style={{
                           fontSize: '0.75rem',
@@ -730,10 +387,9 @@ const ProjectDetails = () => {
             }}
           >
             <motion.div
-              initial={{ scale: 0.85, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.85, opacity: 0, y: 20 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 20, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="glass-card"
               style={{
@@ -741,9 +397,10 @@ const ProjectDetails = () => {
                 width: '100%',
                 padding: '35px',
                 borderRadius: '24px',
-                border: '1px solid var(--accent-glow)',
-                boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-                position: 'relative'
+                border: '1px solid var(--accent-color)',
+                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
+                position: 'relative',
+                textAlign: 'center'
               }}
             >
               <button
@@ -752,77 +409,83 @@ const ProjectDetails = () => {
                   position: 'absolute',
                   top: '20px',
                   right: '20px',
-                  background: 'none',
+                  background: 'rgba(255, 255, 255, 0.05)',
                   border: 'none',
                   color: 'var(--text-secondary)',
-                  cursor: 'pointer',
-                  padding: '5px'
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer'
                 }}
               >
-                <X size={22} />
+                <X size={20} />
               </button>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px' }}>
-                <div style={{
-                  padding: '12px',
-                  borderRadius: '16px',
-                  background: 'var(--accent-glow)',
-                  color: 'var(--accent-color)',
-                  display: 'flex'
-                }}>
-                  <Lock size={28} />
-                </div>
-                <div>
-                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0 }}>
-                    Repositorio Privado
-                  </h3>
-                  <span style={{ fontSize: '0.85rem', color: 'var(--accent-color)', fontWeight: '600' }}>
-                    Código de cliente / Propietario
-                  </span>
-                </div>
+              <div style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                background: 'var(--accent-glow)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px auto'
+              }}>
+                <Lock size={30} className="accent-text" />
               </div>
 
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '30px', fontSize: '0.95rem' }}>
-                El código fuente de <strong>{project.title}</strong> se encuentra en un repositorio privado por acuerdos de confidencialidad y derechos de propiedad. Si deseas revisar el código o agendar una demostración guiada de su arquitectura, contáctame directamente.
+              <h3 style={{ fontSize: '1.6rem', fontWeight: '800', marginBottom: '12px' }}>
+                {lang === 'ES' ? 'Repositorio Privado' : 'Private Repository'}
+              </h3>
+
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '28px', fontSize: '0.95rem' }}>
+                {lang === 'ES' ? (
+                  <>El código fuente de <strong style={{ color: 'white' }}>{content.title}</strong> es privado por motivos de seguridad comercial y protección de infraestructura. Si eres reclutador o deseas revisar la arquitectura del código, puedes solicitar acceso directo:</>
+                ) : (
+                  <>The source code for <strong style={{ color: 'white' }}>{content.title}</strong> is private for commercial security and infrastructure protection. If you are a recruiter or would like to review the code architecture, you can request direct access:</>
+                )}
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <a
-                  href={`https://wa.me/51924461067?text=Hola%20Sebastian,%20quisiera%20solicitar%20acceso%20al%20repositorio%20de%20${encodeURIComponent(project.title)}`}
+                  href={`https://wa.me/51924461067?text=Hola%20Sebastian,%20quisiera%20solicitar%20acceso%20al%20repositorio%20de%20${encodeURIComponent(content.title)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="social-icon"
                   style={{
-                    borderRadius: '12px',
-                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '14px',
                     gap: '10px',
                     background: '#25D366',
-                    color: 'black',
-                    fontWeight: 'bold',
+                    color: 'white',
+                    padding: '14px 20px',
+                    borderRadius: '12px',
+                    fontWeight: '700',
                     textDecoration: 'none'
                   }}
                 >
-                  <FaWhatsapp size={20} /> Solicitar Acceso por WhatsApp
+                  <FaWhatsapp size={20} /> {lang === 'ES' ? 'Solicitar acceso por WhatsApp' : 'Request access via WhatsApp'}
                 </a>
 
                 <a
-                  href={`mailto:sebastiangairthon@gmail.com?subject=Solicitud%20de%20acceso%20a%20repositorio:%20${encodeURIComponent(project.title)}`}
-                  className="social-icon"
+                  href={`mailto:sebastiangairthon@gmail.com?subject=Solicitud%20de%20acceso%20a%20repositorio:%20${encodeURIComponent(content.title)}`}
                   style={{
-                    borderRadius: '12px',
-                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '14px',
                     gap: '10px',
-                    background: 'rgba(255,255,255,0.08)',
+                    background: 'rgba(255, 255, 255, 0.08)',
                     color: 'white',
+                    padding: '14px 20px',
+                    borderRadius: '12px',
                     fontWeight: '600',
                     textDecoration: 'none'
                   }}
                 >
-                  <Mail size={18} /> Enviar Solicitud por Correo
+                  <Mail size={18} /> {lang === 'ES' ? 'Solicitar por Correo Electrónico' : 'Request via Email'}
                 </a>
               </div>
             </motion.div>
