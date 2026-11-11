@@ -10,9 +10,146 @@ import { FaGithub, FaWhatsapp } from 'react-icons/fa';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
 import edanDecorImg from '../imagenes/1logo.png';
+import arcaPageImg from '../imagenes/ARCAPage.png';
+import arcaNewImg from '../imagenes/ARCANEW.png';
 import AudioExtractorWiki from './AudioExtractorWiki';
 
 const projectData = {
+  'arca-ecosystem': {
+    title: 'A.R.C.A. Digital Ecosystem',
+    description: 'Ecosistema tecnológico modular diseñado para centralizar herramientas, recursos académicos e información para la comunidad de Ingeniería de Software.',
+    fullContent: 'A.R.C.A. Digital Ecosystem es una iniciativa tecnológica impulsada por A.R.C.A. PROGRAM que busca centralizar herramientas, recursos académicos, información y oportunidades en diferentes plataformas digitales interconectadas. Nace de la necesidad de construir soluciones propias para la comunidad universitaria, aprovechando el desarrollo de software como medio para democratizar el acceso al conocimiento, facilitar el aprendizaje y promover la colaboración activa entre estudiantes. Como fundador y director tecnológico, definí una arquitectura modular monorepo con Turborepo y pnpm, frontend en React y TypeScript, base de datos relacional PostgreSQL y servicios de autenticación centralizada con Supabase.',
+    tech: ['React', 'TypeScript', 'Turborepo (Monorepo)', 'pnpm Workspaces', 'Supabase Auth', 'PostgreSQL', 'CSS3 Modern UI', 'REST APIs', 'Multi-domain Architecture'],
+    challenges: [
+      'Orquestación de un Monorepo centralizado con Turborepo y pnpm que permita gestionar múltiples plataformas compartiendo paquetes y componentes de diseño sin fricciones ni duplicación de código.',
+      'Diseño de una arquitectura desacoplada para desplegar plataformas mediante dominios y subdominios independientes mientras mantienen una identidad de marca coherente.',
+      'Configuración de autenticación centralizada con Supabase para compartir sesiones seguras entre diferentes aplicaciones del ecosistema.',
+      'Establecimiento de una infraestructura escalable que permita incorporar progresivamente nuevas iniciativas como A.R.C.A. Projects, A.R.C.A. Networking y Banco de Exámenes con IA.'
+    ],
+    results: [
+      'Ecosistema digital activo con plataformas institucionales y de comunicación en producción y desarrollo.',
+      'Reducción drástica del tiempo de configuración de nuevas aplicaciones gracias a la reutilización de librerías y componentes UI compartidos en el monorepo.',
+      'Creación de un espacio real donde los estudiantes de Ingeniería de Software adquieren experiencia práctica en proyectos reales de alto nivel.'
+    ],
+    features: [
+      {
+        title: 'A.R.C.A. Main Website',
+        desc: 'Portal institucional y punto de acceso al ecosistema: comunica la misión, objetivos, iniciativas, equipo de colaboradores y soluciones tecnológicas.'
+      },
+      {
+        title: 'A.R.C.A. News',
+        desc: 'Plataforma digital de noticias y comunicación estudiantil con experiencia editorial contemporánea, eventos, convocatorias y avisos destacados.'
+      },
+      {
+        title: 'A.R.C.A. Banco de Exámenes (IA)',
+        desc: 'Plataforma de recursos académicos y repositorio de evaluaciones guiado por modelos de inteligencia artificial para potenciar el estudio.'
+      },
+      {
+        title: 'Arquitectura Monorepo & Subdominios',
+        desc: 'Infraestructura modular preparada para incorporar nuevas herramientas y plataformas de forma independiente sin comprometer el núcleo del ecosistema.'
+      }
+    ],
+    architecture: [
+      'Estructura Monorepo gestionada con Turborepo y pnpm para optimizar builds y compartir librerías UI.',
+      'Frontend moderno desarrollado en React y TypeScript con principios de diseño de alta fidelidad.',
+      'Backend y autenticación centralizada mediante Supabase y PostgreSQL con políticas de seguridad RLS.',
+      'Despliegue multizona y modular a través de dominios y subdominios independientes.'
+    ],
+    architectureFlow: [
+      {
+        step: '01',
+        title: 'Orquestación & Monorepo',
+        subtitle: 'Turborepo + pnpm Workspaces',
+        desc: 'Estructura centralizada de repositorios, scripts compartidos y dependencias optimizadas para alto rendimiento en desarrollo.',
+        icon: 'Workflow',
+        tag: 'Monorepo'
+      },
+      {
+        step: '02',
+        title: 'Frontend & UI Modular',
+        subtitle: 'React 19 + TypeScript',
+        desc: 'Aplicaciones desacopladas (Portal, News, Recursos) que consumen componentes de interfaz compartidos.',
+        icon: 'Laptop',
+        tag: 'React / TS'
+      },
+      {
+        step: '03',
+        title: 'Capa de Servicios & Auth',
+        subtitle: 'Supabase REST & Auth',
+        desc: 'Servicios transversales de autenticación segura, control de acceso y gestión de sesiones entre plataformas.',
+        icon: 'KeyRound',
+        tag: 'Supabase'
+      },
+      {
+        step: '04',
+        title: 'Base de Datos Centralizada',
+        subtitle: 'PostgreSQL Relacional',
+        desc: 'Almacenamiento persistente para contenidos, noticias, recursos estudiantiles y trazabilidad de eventos.',
+        icon: 'Database',
+        tag: 'PostgreSQL'
+      }
+    ],
+    retrospective: {
+      lessons: [
+        'La implementación temprana de un Monorepo con Turborepo y pnpm ahorra semanas de esfuerzo en la estandarización de componentes y estilos.',
+        'La arquitectura basada en subdominios independientes permite iterar en cada plataforma sin riesgos de regresión en las demás.',
+        'Construir una iniciativa comunitaria requiere tanto liderazgo humano como bases técnicas sólidas y bien documentadas.'
+      ]
+    },
+    image: arcaPageImg,
+    isPrivate: false,
+    demoUrl: 'https://www.arca-program.com/',
+    demoLabel: 'Visitar Plataforma Web'
+  },
+  'arca-news': {
+    title: 'A.R.C.A. News',
+    description: 'Plataforma digital de noticias y comunicación estudiantil con experiencia editorial moderna, cobertura de eventos y avisos institucionales.',
+    fullContent: 'A.R.C.A. News es una plataforma de comunicación digital desarrollada para centralizar y difundir información relevante para la comunidad universitaria. Su propósito es ofrecer un espacio donde los estudiantes puedan mantenerse informados sobre noticias, eventos, actividades, iniciativas y novedades de A.R.C.A. PROGRAM y el entorno de la ingeniería de software. La interfaz ofrece una experiencia editorial moderna, priorizando la presentación de noticias destacadas, artículos de divulgación tecnológica y avisos importantes.',
+    tech: ['React', 'TypeScript', 'Supabase', 'CSS3 (Editorial Layout)', 'Responsive Design', 'Framer Motion'],
+    challenges: [
+      'Diseño de una cuadrícula editorial dinámica y adaptable que destaque noticias principales sin saturar al usuario.',
+      'Organización de publicaciones por categorías temáticas (talleres, convocatorias, tecnología y vida universitaria).',
+      'Optimización de tiempos de carga en dispositivos móviles para facilitar la lectura rápida en el campus.'
+    ],
+    results: [
+      'Canal oficial de información con alta legibilidad y navegación orientada al descubrimiento de contenidos.',
+      'Mayor participación y visibilidad de los proyectos y talleres impulsados por la asociación.',
+      'Identidad visual moderna perfectamente integrada con los lineamientos gráficos de A.R.C.A.'
+    ],
+    features: [
+      {
+        title: 'Portada Editorial & Artículos Destacados',
+        desc: 'Módulo principal con titulares dinámicos, noticias destacadas y presentación visual de alto impacto.'
+      },
+      {
+        title: 'Agenda de Eventos y Talleres',
+        desc: 'Sección especializada para el anuncio de webinars, hackathones y sesiones de aprendizaje colaborativo.'
+      },
+      {
+        title: 'Sistema de Avisos Destacados',
+        desc: 'Alertas prioritarias en la interfaz para comunicar novedades institucionales urgentes a la comunidad.'
+      },
+      {
+        title: 'Categorización & Búsqueda Rápida',
+        desc: 'Filtros ágiles para descubrir artículos técnicos, novedades de proyectos y comunicados oficiales.'
+      }
+    ],
+    architecture: [
+      'Frontend en React y TypeScript con maquetación editorial responsiva.',
+      'Integración con la capa de datos de Supabase para publicación y actualización de notas.',
+      'Animaciones y transiciones de lectura fluidas con Framer Motion.'
+    ],
+    retrospective: {
+      lessons: [
+        'Una tipografía cuidada y un espaciado equilibrado marcan la diferencia en plataformas de lectura digital.',
+        'La jerarquía visual con titulares destacados incrementa el engagement del estudiante con las noticias.'
+      ]
+    },
+    image: arcaNewImg,
+    isPrivate: false,
+    demoUrl: 'https://news.arca-program.com/',
+    demoLabel: 'Visitar A.R.C.A. News'
+  },
   'edam-web': {
     title: 'EdanDecor Mueblería E-commerce',
     description: 'Plataforma e-commerce fullstack para exhibición, gestión e inventario de muebles con catálogo desacoplado y arquitectura modular.',
@@ -223,6 +360,7 @@ const projectData = {
 
 const renderFlowIcon = (iconName) => {
   switch (iconName) {
+    case 'Workflow': return <Workflow size={26} className="accent-text" />;
     case 'Laptop': return <Laptop size={26} className="accent-text" />;
     case 'Server': return <Server size={26} className="accent-text" />;
     case 'KeyRound': return <KeyRound size={26} className="accent-text" />;
@@ -295,7 +433,7 @@ const ProjectDetails = () => {
             <div style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}>
               {project.demoUrl && (
                 <a href={project.demoUrl} target="_blank" rel="noreferrer" className="social-icon" style={{ borderRadius: '12px', width: 'auto', padding: '0 25px', gap: '10px', background: 'var(--accent-color)', color: 'black', fontWeight: 'bold', textDecoration: 'none' }}>
-                  Ver Web en Vivo <ExternalLink size={18} />
+                  {project.demoLabel || 'Ver Web en Vivo'} <ExternalLink size={18} />
                 </a>
               )}
               {project.docUrl && (
@@ -514,50 +652,54 @@ const ProjectDetails = () => {
           </div>
         )}
 
-        {/* IDEA 6: Lecciones Aprendidas & Retrospectiva (Roadmap V2) */}
+        {/* Lecciones Aprendidas & Retrospectiva (Roadmap V2) */}
         {project.retrospective && (
           <div style={{ marginTop: '80px', marginBottom: '40px' }}>
-            <div className="grid-2" style={{ gap: '40px' }}>
+            <div className={project.retrospective.roadmap && project.retrospective.roadmap.length > 0 ? "grid-2" : ""} style={{ gap: '40px' }}>
               {/* Lecciones Aprendidas */}
-              <div className="glass-card" style={{ padding: '30px' }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <GraduationCap className="accent-text" size={26} /> Lecciones Aprendidas
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {project.retrospective.lessons.map((lesson, idx) => (
-                    <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                      <Sparkles className="accent-text" size={18} style={{ flexShrink: 0, marginTop: '3px' }} />
-                      <span>{lesson}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {project.retrospective.lessons && (
+                <div className="glass-card" style={{ padding: '30px' }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <GraduationCap className="accent-text" size={26} /> Lecciones Aprendidas
+                  </h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {project.retrospective.lessons.map((lesson, idx) => (
+                      <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                        <Sparkles className="accent-text" size={18} style={{ flexShrink: 0, marginTop: '3px' }} />
+                        <span>{lesson}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Roadmap V2.0 */}
-              <div className="glass-card" style={{ padding: '30px', borderLeft: '4px solid var(--accent-color)' }}>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <Rocket className="accent-text" size={26} /> Próximas Mejoras (Roadmap V2.0)
-                </h3>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                  {project.retrospective.roadmap.map((item, idx) => (
-                    <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', alignItems: 'flex-start' }}>
-                      <span style={{
-                        fontSize: '0.75rem',
-                        fontWeight: '700',
-                        color: 'black',
-                        background: 'var(--accent-color)',
-                        padding: '3px 8px',
-                        borderRadius: '6px',
-                        marginTop: '2px',
-                        flexShrink: 0
-                      }}>
-                        V2.{idx + 1}
-                      </span>
-                      <span style={{ color: 'var(--text-color)', fontSize: '0.95rem', lineHeight: '1.6' }}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {project.retrospective.roadmap && project.retrospective.roadmap.length > 0 && (
+                <div className="glass-card" style={{ padding: '30px', borderLeft: '4px solid var(--accent-color)' }}>
+                  <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <Rocket className="accent-text" size={26} /> Próximas Mejoras (Roadmap V2.0)
+                  </h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                    {project.retrospective.roadmap.map((item, idx) => (
+                      <li key={idx} style={{ display: 'flex', gap: '12px', marginBottom: '15px', alignItems: 'flex-start' }}>
+                        <span style={{
+                          fontSize: '0.75rem',
+                          fontWeight: '700',
+                          color: 'black',
+                          background: 'var(--accent-color)',
+                          padding: '3px 8px',
+                          borderRadius: '6px',
+                          marginTop: '2px',
+                          flexShrink: 0
+                        }}>
+                          V2.{idx + 1}
+                        </span>
+                        <span style={{ color: 'var(--text-color)', fontSize: '0.95rem', lineHeight: '1.6' }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         )}

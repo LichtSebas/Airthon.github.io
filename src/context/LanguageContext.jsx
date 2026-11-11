@@ -8,12 +8,13 @@ export const translations = {
       home: 'Inicio',
       about: 'Sobre Mí',
       skills: 'Habilidades',
+      projects: 'Proyectos',
       experience: 'Experiencia',
       certificates: 'Certificados',
       contact: 'Contacto'
     },
     hero: {
-      tag: 'Bienvenido a mi mundo digital',
+      tag: 'Bienvenido a mi portafolio',
       availability: 'Disponible para Nuevas Oportunidades (Remoto / Freelance)',
       subtitlePrefix: 'Estudiante de ',
       softwareEng: 'Ingeniería de Software',
@@ -21,38 +22,42 @@ export const translations = {
       fullstack: 'Fullstack',
       subtitleSuffix: ' especializado en soluciones eficientes y creativas.',
       downloadCv: 'Descargar CV',
-      viewCertificates: 'Ver Certificados'
+      viewCertificates: 'Ver Certificados',
+      viewEcosystem: 'Ver Ecosistema A.R.C.A.'
     },
     about: {
       title: 'Sobre',
       titleAccent: 'Mí',
-      subtitle: 'Apasionado por la tecnología, la arquitectura limpia y el desarrollo fullstack.',
-      p1: 'Soy un estudiante enfocado en la Ingeniería de Software con pasión por resolver problemas reales a través de código elegante, eficiente y mantenible.',
-      p2: 'Me especializo en construir aplicaciones web modernas usando PHP Nativo, Node.js, PostgreSQL y React, cuidando tanto la seguridad en el servidor como la experiencia visual del usuario.',
-      expMonths: 'Meses de Experiencia',
-      completedProjects: 'Proyectos Completados',
-      certificatesEarned: 'Certificados Obtenidos'
+      subtitle: 'Aprender, colaborar, crear y compartir.',
+      badge: 'Estudiante de Ingeniería de Software & Fundador de A.R.C.A.',
+      p1: 'Soy estudiante de Ingeniería de Software apasionado por la tecnología, el desarrollo de software y la creación de soluciones que generen un impacto real. Me interesa transformar ideas en productos tecnológicos, explorar nuevas herramientas y diseñar sistemas que resuelvan problemas mediante la innovación y la colaboración.',
+      p2: 'A lo largo de mi formación he desarrollado plataformas web, arquitectura de software, integración de servicios y herramientas digitales. Mi enfoque no se limita a escribir código: también busco comprender las necesidades detrás de cada proyecto, definir soluciones, organizar su desarrollo y construir productos que puedan evolucionar a largo plazo.',
+      p3: 'Soy fundador y presidente de A.R.C.A. PROGRAM, una iniciativa estudiantil orientada a impulsar el desarrollo tecnológico, académico y profesional mediante la creación de proyectos y un ecosistema de plataformas digitales para la comunidad universitaria.',
+      philosophy: 'Mi filosofía: aprender, colaborar, crear y compartir.',
+      expMonths: 'Meses de Trayectoria',
+      completedProjects: 'Proyectos en Portafolio',
+      activePlatforms: 'Plataformas del Ecosistema'
     },
     skills: {
       title: 'Mis',
       titleAccent: 'Habilidades',
-      subtitle: 'Tecnologías y herramientas organizadas por arquitectura y dominio técnico.',
+      subtitle: 'Tecnologías y herramientas organizadas por arquitectura, dominio técnico y orquestación.',
       backendTitle: 'Backend & Base de Datos',
       backendBadge: 'Server & DB Architecture',
       frontendTitle: 'Frontend & UI/UX',
       frontendBadge: 'Interactive UI & Web App',
-      devopsTitle: 'DevOps & Herramientas',
-      devopsBadge: 'Deployment & Workflows'
+      devopsTitle: 'Arquitectura & DevOps',
+      devopsBadge: 'Monorepo, CI/CD & Tooling'
     },
     experience: {
-      title: 'Experiencia',
-      titleAccent: 'Laboral',
+      title: 'Experiencia &',
+      titleAccent: 'Liderazgo',
       viewProject: 'Ver Caso de Estudio'
     },
     projects: {
       title: 'Mis',
       titleAccent: 'Proyectos',
-      subtitle: 'Una selección de trabajos que demuestran mi capacidad técnica y creativa.',
+      subtitle: 'Una selección de iniciativas y plataformas que demuestran mi capacidad técnica, arquitectónica y creativa.',
       viewCaseStudy: 'Ver Documentación'
     },
     contact: {
@@ -85,12 +90,13 @@ export const translations = {
       home: 'Home',
       about: 'About Me',
       skills: 'Skills',
+      projects: 'Projects',
       experience: 'Experience',
       certificates: 'Certificates',
       contact: 'Contact'
     },
     hero: {
-      tag: 'Welcome to my digital world',
+      tag: 'Welcome to my portfolio',
       availability: 'Available for New Opportunities (Remote / Freelance)',
       subtitlePrefix: 'Student of ',
       softwareEng: 'Software Engineering',
@@ -98,38 +104,42 @@ export const translations = {
       fullstack: 'Fullstack Developer',
       subtitleSuffix: ' specialized in efficient and creative solutions.',
       downloadCv: 'Download Resume',
-      viewCertificates: 'View Certificates'
+      viewCertificates: 'View Certificates',
+      viewEcosystem: 'View A.R.C.A. Ecosystem'
     },
     about: {
       title: 'About',
       titleAccent: 'Me',
-      subtitle: 'Passionate about technology, clean architecture, and fullstack development.',
-      p1: 'I am a Software Engineering student passionate about solving real-world problems through elegant, efficient, and maintainable code.',
-      p2: 'I specialize in building modern web applications using Native PHP, Node.js, PostgreSQL, and React, focusing on both server security and visual user experience.',
-      expMonths: 'Months of Experience',
-      completedProjects: 'Completed Projects',
-      certificatesEarned: 'Certificates Earned'
+      subtitle: 'Learn, collaborate, create, and share.',
+      badge: 'Software Engineering Student & Founder of A.R.C.A.',
+      p1: 'I am a Software Engineering student passionate about technology, software development, and building solutions that deliver real impact. I love transforming ideas into tech products, exploring new tools, and architecting systems that solve real problems through innovation and collaboration.',
+      p2: 'Throughout my education, I have developed web platforms, software architectures, third-party service integrations, and digital tools. My approach goes beyond writing code: I seek to understand project needs, define solutions, organize development, and build products designed to evolve long-term.',
+      p3: 'I am the founder and president of A.R.C.A. PROGRAM, a student initiative driving technological, academic, and professional growth through hands-on projects and a digital platform ecosystem for the university community.',
+      philosophy: 'My philosophy: learn, collaborate, create, and share.',
+      expMonths: 'Months of Journey',
+      completedProjects: 'Portfolio Projects',
+      activePlatforms: 'Ecosystem Platforms'
     },
     skills: {
       title: 'My',
       titleAccent: 'Skills',
-      subtitle: 'Technologies and tools organized by architecture and technical domain.',
+      subtitle: 'Technologies and tools structured by architecture, technical domain, and orchestration.',
       backendTitle: 'Backend & Database',
       backendBadge: 'Server & DB Architecture',
       frontendTitle: 'Frontend & UI/UX',
       frontendBadge: 'Interactive UI & Web App',
-      devopsTitle: 'DevOps & Tools',
-      devopsBadge: 'Deployment & Workflows'
+      devopsTitle: 'Architecture & DevOps',
+      devopsBadge: 'Monorepo, CI/CD & Tooling'
     },
     experience: {
-      title: 'Work',
-      titleAccent: 'Experience',
+      title: 'Experience &',
+      titleAccent: 'Leadership',
       viewProject: 'View Case Study'
     },
     projects: {
       title: 'My',
       titleAccent: 'Projects',
-      subtitle: 'A selection of works demonstrating my technical and creative capabilities.',
+      subtitle: 'A selection of initiatives and platforms demonstrating technical, architectural, and creative skills.',
       viewCaseStudy: 'View Case Study'
     },
     contact: {

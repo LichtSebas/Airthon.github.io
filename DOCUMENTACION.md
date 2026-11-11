@@ -44,7 +44,7 @@ Portfolio/
 │   │   ├── certificates.json   # Datos de certificados (autogenerado y editable)
 │   │   └── logo_mappings.json  # Base de datos de firmas (MD5) de logos
 │   ├── App.jsx                 # Configuración de rutas y footer
-│   ├── index.css               # Diseño global, variables y estilos del cursor
+│   ├── index.css               # Diseño global, variables y estilos de la aplicación
 │   └── main.jsx                # Punto de entrada de React
 ├── vite.config.js              # Configuración del empaquetador Vite
 ├── package.json                # Dependencias y scripts del proyecto

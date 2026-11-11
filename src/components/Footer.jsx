@@ -28,8 +28,8 @@ const Footer = () => {
             <Link to="/" onClick={scrollToTop} className="logo text-gradient" style={{ fontSize: '1.8rem', fontWeight: '900', textDecoration: 'none' }}>
               SG.
             </Link>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '8px', maxWidth: '350px' }}>
-              Sebastian Gonzales — Software Engineer & Fullstack Developer.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '8px', maxWidth: '380px' }}>
+              Sebastian Gonzales — Software Engineer & Founder @ A.R.C.A. PROGRAM.
             </p>
           </div>
 

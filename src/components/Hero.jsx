@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="hero-glow-1" />
       <div className="hero-glow-2" />
 
-      <div className="container">
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', width: '100%' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,6 +48,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="hero-title"
+          style={{ textAlign: 'center' }}
         >
           Sebastian <span className="text-gradient">Gonzales</span>
         </motion.h1>
@@ -55,8 +56,9 @@ const Hero = () => {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
           className="hero-subtitle"
+          style={{ textAlign: 'center', margin: '0 auto 35px auto', maxWidth: '780px' }}
         >
           {t.hero.subtitlePrefix}<strong>{t.hero.softwareEng}</strong>{t.hero.and}<strong>{t.hero.fullstack}</strong>{t.hero.subtitleSuffix}
         </motion.h2>
@@ -64,8 +66,9 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           className="social-links"
+          style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginBottom: '40px' }}
         >
           <a href="https://github.com/LichtSebas" target="_blank" rel="noreferrer" className="social-icon">
             <FaGithub size={24} />
@@ -81,7 +84,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.75 }}
+          transition={{ duration: 0.5, delay: 0.65 }}
           style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
         >
           <a

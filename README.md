@@ -9,7 +9,8 @@ Portafolio web interactivo y de alto rendimiento diseñado para destacar habilid
 ## 🚀 Características Clave
 
 *   **Diseño Interactivo y Fluido**: Interfaz moderna de tipo *Glassmorphism* con animaciones dinámicas gestionadas por `framer-motion`.
-*   **Cursor Inteligente**: Cursor personalizado con físicas inerciales (`useSpring`) que se adapta a elementos interactivos y se apaga automáticamente en pantallas táctiles.
+*   **Navegación Fluida & Cursor Estándar**: Experiencia de usuario limpia y accesible respetando el cursor nativo del navegador sin sobrecargas visuales.
+*   **Ecosistema A.R.C.A. & Casos de Estudio**: Cobertura detallada del liderazgo tecnológico en A.R.C.A. PROGRAM (Portal institucional, A.R.C.A. News, Arquitectura Monorepo con Turborepo, TypeScript y Supabase).
 *   **Sección de Certificados**: Visualizador dinámico de certificaciones que incluye un modal interactivo con detalles ampliados y habilidades validadas.
 *   **Automatización con Python**: Script que analiza PDFs de certificados, genera previsualizaciones PNG optimizadas de manera automática y aprende a reconocer emisores cruzando las firmas MD5 de sus logos.
 *   **Despliegue Continuo (CI/CD)**: Pipeline en GitHub Actions configurado para compilar y publicar los cambios en vivo en cada `git push`.

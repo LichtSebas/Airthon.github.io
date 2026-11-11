@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Layers, Layout, Terminal, Sparkles } from 'lucide-react';
+import { ArrowRight, Layers, Layout, Terminal, Sparkles, Rocket } from 'lucide-react';
 import satKioscoImg from '../imagenes/SATPresention.PNG';
 import audioExtractorImg from '../imagenes/AudioExtractor.png';
 import edanDecorImg from '../imagenes/1logo.png';
+import arcaPageImg from '../imagenes/ARCAPage.png';
+import arcaNewImg from '../imagenes/ARCANEW.png';
 import { useLanguage } from '../context/LanguageContext';
 
 const Projects = () => {
@@ -13,21 +15,39 @@ const Projects = () => {
 
   const filterButtonsES = [
     { id: 'all', label: 'Todos los Proyectos', icon: <Layers size={16} /> },
-    { id: 'fullstack', label: '🌐 Web Fullstack', icon: <Layout size={16} /> },
-    { id: 'desktop', label: '💻 Apps de Escritorio', icon: <Terminal size={16} /> },
-    { id: 'ux', label: '📱 UX & Tecnología Cívica', icon: <Sparkles size={16} /> }
+    { id: 'arca', label: 'Ecosistema A.R.C.A.', icon: <Rocket size={16} /> },
+    { id: 'fullstack', label: 'Web Fullstack', icon: <Layout size={16} /> },
+    { id: 'desktop', label: 'Apps de Escritorio', icon: <Terminal size={16} /> },
+    { id: 'ux', label: 'UX & Tecnología Cívica', icon: <Sparkles size={16} /> }
   ];
 
   const filterButtonsEN = [
     { id: 'all', label: 'All Projects', icon: <Layers size={16} /> },
-    { id: 'fullstack', label: '🌐 Fullstack Web', icon: <Layout size={16} /> },
-    { id: 'desktop', label: '💻 Desktop Apps', icon: <Terminal size={16} /> },
-    { id: 'ux', label: '📱 UX & Civic Tech', icon: <Sparkles size={16} /> }
+    { id: 'arca', label: 'A.R.C.A. Ecosystem', icon: <Rocket size={16} /> },
+    { id: 'fullstack', label: 'Fullstack Web', icon: <Layout size={16} /> },
+    { id: 'desktop', label: 'Desktop Apps', icon: <Terminal size={16} /> },
+    { id: 'ux', label: 'UX & Civic Tech', icon: <Sparkles size={16} /> }
   ];
 
   const filterButtons = lang === 'ES' ? filterButtonsES : filterButtonsEN;
 
   const projectsES = [
+    {
+      id: 'arca-ecosystem',
+      group: 'arca',
+      title: 'A.R.C.A. Digital Ecosystem',
+      category: 'Ecosistema & Arquitectura',
+      image: arcaPageImg,
+      description: 'Ecosistema tecnológico modular para transformar la experiencia universitaria: centraliza portal institucional, noticias, banco de exámenes con IA y gestión de proyectos estudiantiles.'
+    },
+    {
+      id: 'arca-news',
+      group: 'arca',
+      title: 'A.R.C.A. News',
+      category: 'Medios Digitales & Prensa',
+      image: arcaNewImg,
+      description: 'Plataforma de comunicación digital estudiantil diseñada con experiencia editorial moderna, noticias destacadas, artículos técnicos, avisos y agenda de eventos.'
+    },
     {
       id: 'sat-kiosco-inteligente',
       group: 'ux',
@@ -65,6 +85,22 @@ const Projects = () => {
 
   const projectsEN = [
     {
+      id: 'arca-ecosystem',
+      group: 'arca',
+      title: 'A.R.C.A. Digital Ecosystem',
+      category: 'Ecosystem & Architecture',
+      image: arcaPageImg,
+      description: 'Modular tech ecosystem designed to transform the university experience: centralizes institutional portal, news platform, AI-assisted exam bank, and student projects.'
+    },
+    {
+      id: 'arca-news',
+      group: 'arca',
+      title: 'A.R.C.A. News',
+      category: 'Digital Media & Editorial',
+      image: arcaNewImg,
+      description: 'Digital student communication platform with modern editorial UX, publishing featured news, software engineering articles, announcements, and events.'
+    },
+    {
       id: 'sat-kiosco-inteligente',
       group: 'ux',
       title: 'SAT Kiosk',
@@ -100,7 +136,13 @@ const Projects = () => {
   ];
 
   const projects = lang === 'ES' ? projectsES : projectsEN;
-  const filteredProjects = filter === 'all' ? projects : projects.filter(p => p.group === filter);
+  const filteredProjects = filter === 'all' 
+    ? projects 
+    : filter === 'arca'
+      ? projects.filter(p => p.group === 'arca')
+      : filter === 'fullstack'
+        ? projects.filter(p => p.group === 'fullstack' || p.group === 'arca')
+        : projects.filter(p => p.group === filter);
 
   return (
     <section id="projects" className="section bg-[var(--bg-color)]">
@@ -137,7 +179,6 @@ const Projects = () => {
                   border: isActive ? '1px solid var(--accent-color)' : '1px solid rgba(255, 255, 255, 0.08)',
                   fontSize: '0.9rem',
                   fontWeight: '700',
-                  cursor: 'pointer',
                   transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                   boxShadow: isActive ? '0 8px 20px var(--accent-glow)' : 'none'
                 }}

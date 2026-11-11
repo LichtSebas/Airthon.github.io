@@ -21,7 +21,14 @@ import {
   Code,
   FileVideo,
   FileAudio,
-  Info
+  Info,
+  Lightbulb,
+  Headphones,
+  Package,
+  Clock,
+  Lock,
+  Rocket,
+  RefreshCw
 } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -90,7 +97,9 @@ const AudioExtractorWiki = () => {
         <div style={{ padding: '16px 22px', borderRadius: '16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.06)', marginBottom: '35px', display: 'flex', alignItems: 'center', gap: '15px' }}>
           <Info className="accent-text" size={22} style={{ flexShrink: 0 }} />
           <p style={{ margin: 0, fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-            <strong style={{ color: 'white' }}>💡 Filosofía de Documentación por Naturaleza de Proyecto:</strong><br />
+            <strong style={{ color: 'white', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Lightbulb size={16} className="accent-text" /> Filosofía de Documentación por Naturaleza de Proyecto:
+            </strong><br />
             A diferencia de las plataformas web (centradas en arquitecturas HTTP y APIs REST), <strong>AudioExtractor Pro v3.0</strong> es un software de escritorio local. Su Wiki utiliza un formato <strong>Studio Interactivo</strong> diseñado para mostrar la experiencia de usuario en Swing, la ejecución multihilo y la interacción CLI directa con FFmpeg.
           </p>
         </div>
@@ -291,8 +300,8 @@ const AudioExtractorWiki = () => {
               {activeTab === 'trim' && (
                 <div className="grid-2" style={{ gap: '40px', alignItems: 'center' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-                      🎧 Conversión Individual & Recorte de Precisión
+                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Headphones size={26} className="accent-text" /> Conversión Individual & Recorte de Precisión
                     </h3>
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '25px' }}>
                       Permite arrastrar cualquier archivo de video (MP4, MKV, AVI, MOV, WEBM) a la pantalla principal. Puedes definir el tiempo exacto de inicio y fin para recortar solo la mejor parte del audio.
@@ -341,7 +350,9 @@ const AudioExtractorWiki = () => {
                     <div style={{ border: '2px dashed var(--accent-glow)', padding: '25px', borderRadius: '16px', textAlign: 'center', marginBottom: '25px', background: 'rgba(255,255,255,0.02)' }}>
                       <FileVideo size={36} className="accent-text" style={{ margin: '0 auto 10px auto' }} />
                       <p style={{ color: 'white', fontWeight: '600', margin: 0 }}>concierto_envivo_hd.mkv</p>
-                      <span style={{ fontSize: '0.75rem', color: '#27C93F' }}>✔ Cargas completada con éxito</span>
+                      <span style={{ fontSize: '0.75rem', color: '#27C93F', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                        <CheckCircle2 size={13} /> Carga completada con éxito
+                      </span>
                     </div>
 
                     <div style={{ background: 'rgba(255,255,255,0.03)', padding: '15px', borderRadius: '12px' }}>
@@ -360,8 +371,8 @@ const AudioExtractorWiki = () => {
               {activeTab === 'batch' && (
                 <div className="grid-2" style={{ gap: '40px', alignItems: 'center' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-                      📦 Procesamiento por Lotes (Batch Queue)
+                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Package size={26} className="accent-text" /> Procesamiento por Lotes (Batch Queue)
                     </h3>
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '25px' }}>
                       Diseñado para procesar listas masivas de archivos o carpetas completas. El sistema gestiona una cola multihilo que convierte secuencialmente cada video en segundo plano sin bloquear la ventana de usuario.
@@ -386,17 +397,23 @@ const AudioExtractorWiki = () => {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px' }}>
                         <span style={{ fontSize: '0.85rem', color: 'white' }}>01_entrevista_podcast.mp4</span>
-                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'rgba(39,201,63,0.15)', color: '#27C93F', borderRadius: '10px', fontWeight: 'bold' }}>✔ Completado</span>
+                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'rgba(39,201,63,0.15)', color: '#27C93F', borderRadius: '10px', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <CheckCircle2 size={12} /> Completado
+                        </span>
                       </div>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', background: 'rgba(255,255,255,0.05)', borderRadius: '10px', border: '1px solid var(--accent-glow)' }}>
                         <span style={{ fontSize: '0.85rem', color: 'white' }}>02_concierto_completo.mkv</span>
-                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'var(--accent-glow)', color: 'var(--accent-color)', borderRadius: '10px', fontWeight: 'bold' }}>⚙️ Procesando (68%)</span>
+                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'var(--accent-glow)', color: 'var(--accent-color)', borderRadius: '10px', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <RefreshCw size={12} className="spin" /> Procesando (68%)
+                        </span>
                       </div>
 
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '10px' }}>
                         <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>03_videoclip_oficial.avi</span>
-                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)', borderRadius: '10px' }}>⏳ En Cola</span>
+                        <span style={{ fontSize: '0.75rem', padding: '4px 10px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)', borderRadius: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                          <Clock size={12} /> En Cola
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -406,8 +423,8 @@ const AudioExtractorWiki = () => {
               {activeTab === 'id3' && (
                 <div className="grid-2" style={{ gap: '40px', alignItems: 'center' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-                      🏷️ Editor de Metadatos ID3 Integrado
+                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Tag size={26} className="accent-text" /> Editor de Metadatos ID3 Integrado
                     </h3>
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '20.px' }}>
                       Personaliza las etiquetas de audio antes de exportar. Los metadatos ID3 permiten que reproductores de música (como Spotify, Apple Music o reproductores de coche) reconozcan la canción correctamente.
@@ -446,8 +463,8 @@ const AudioExtractorWiki = () => {
               {activeTab === 'history' && (
                 <div className="grid-2" style={{ gap: '40px', alignItems: 'center' }}>
                   <div>
-                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-                      🕒 Historial Reciente & Reproductor Java Sound
+                    <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <Clock size={26} className="accent-text" /> Historial Reciente & Reproductor Java Sound
                     </h3>
                     <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '25px' }}>
                       Al finalizar cada conversión, el mini reproductor nativo te permite escuchar la pista al instante. Además, incluye acceso en 1 clic para abrir el Explorador de Windows en la carpeta de salida.
@@ -536,8 +553,8 @@ const AudioExtractorWiki = () => {
         {/* Technical Comparison Table */}
         <div style={{ marginBottom: '60px' }}>
           <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white' }}>
-              ⚡ Comparativa: <span className="accent-text">App de Escritorio vs Herramientas Web</span>
+            <h3 style={{ fontSize: '1.8rem', fontWeight: '800', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+              <Zap size={26} className="accent-text" /> Comparativa: <span className="accent-text">App de Escritorio vs Herramientas Web</span>
             </h3>
           </div>
 
@@ -552,22 +569,38 @@ const AudioExtractorWiki = () => {
               </thead>
               <tbody>
                 <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>🔒 Privacidad de Datos</td>
+                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Lock size={16} className="accent-text" /> Privacidad de Datos
+                    </div>
+                  </td>
                   <td style={{ padding: '18px 24px', color: '#27C93F', fontWeight: 'bold' }}>100% Local (Nunca sube tus archivos)</td>
                   <td style={{ padding: '18px 24px', color: '#FF5F56' }}>Subida obligatoria a servidores de terceros</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>📦 Límite de Tamaño de Archivo</td>
+                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Package size={16} className="accent-text" /> Límite de Tamaño de Archivo
+                    </div>
+                  </td>
                   <td style={{ padding: '18px 24px', color: '#27C93F', fontWeight: 'bold' }}>Sin límites (Procesa archivos de 50+ GB)</td>
                   <td style={{ padding: '18px 24px', color: '#FF5F56' }}>Limitado (max 100 MB o de pago)</td>
                 </tr>
                 <tr style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>⚡ Velocidad de Conversión</td>
+                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Zap size={16} className="accent-text" /> Velocidad de Conversión
+                    </div>
+                  </td>
                   <td style={{ padding: '18px 24px', color: '#27C93F', fontWeight: 'bold' }}>Procesamiento local nativo (Ultra rápido)</td>
                   <td style={{ padding: '18px 24px', color: '#FFBD2E' }}>Depende de la velocidad de subida/bajada</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>✂️ Trimming & Ganancia ID3</td>
+                  <td style={{ padding: '18px 24px', color: 'white', fontWeight: '600' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Scissors size={16} className="accent-text" /> Trimming & Ganancia ID3
+                    </div>
+                  </td>
                   <td style={{ padding: '18px 24px', color: '#27C93F', fontWeight: 'bold' }}>Trimming milimétrico + volumen + ID3 integrados</td>
                   <td style={{ padding: '18px 24px', color: '#FFBD2E' }}>Básico o requiere software de terceros</td>
                 </tr>
@@ -579,8 +612,8 @@ const AudioExtractorWiki = () => {
         {/* Retrospective & Roadmap Section */}
         <div className="grid-2" style={{ gap: '30px' }}>
           <div className="glass-card" style={{ padding: '30px', borderRadius: '20px' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-              💡 Lecciones Aprendidas de Arquitectura
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Lightbulb size={22} className="accent-text" /> Lecciones Aprendidas de Arquitectura
             </h3>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', position: 'relative', paddingLeft: '20px', textAlign: 'left' }}>
@@ -595,8 +628,8 @@ const AudioExtractorWiki = () => {
           </div>
 
           <div className="glass-card" style={{ padding: '30px', borderRadius: '20px' }}>
-            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'white', marginBottom: '15px' }}>
-              🚀 Roadmap Futuro v3.5
+            <h3 style={{ fontSize: '1.3rem', fontWeight: '800', color: 'white', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Rocket size={22} className="accent-text" /> Roadmap Futuro v3.5
             </h3>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <li style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', position: 'relative', paddingLeft: '20px', textAlign: 'left' }}>
