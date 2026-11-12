@@ -88,8 +88,8 @@ const Hero = () => {
           style={{ display: 'flex', gap: '15px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}
         >
           <a
-            href="/CV_Sebastian_Gonzales.pdf"
-            download="CV_Sebastian_Gonzales.pdf"
+            href="/CV-GonzalesAroniSebastian.pdf"
+            download="CV-GonzalesAroniSebastian.pdf"
             style={{
               display: 'inline-flex',
               alignItems: 'center',

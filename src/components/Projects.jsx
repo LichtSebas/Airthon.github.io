@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Layers, Layout, Terminal, Sparkles, Rocket, ExternalLink } from 'lucide-react';
+import { ArrowRight, Layers, Layout, Terminal, Sparkles, Rocket, ExternalLink, Lock, X } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 import { useLanguage } from '../context/LanguageContext';
 import { projectsList } from '../data/projectsData';
 
 const Projects = () => {
   const { lang, t } = useLanguage();
   const [filter, setFilter] = useState('all');
+  const [privateModalProject, setPrivateModalProject] = useState(null);
 
   const filterButtonsES = [
     { id: 'all', label: 'Todos los Proyectos', icon: <Layers size={16} /> },
@@ -176,7 +178,7 @@ const Projects = () => {
                         {t.projects.viewCaseStudy} <ArrowRight size={17} />
                       </Link>
 
-                      {project.demoUrl && (
+                      {project.demoUrl ? (
                         <a
                           href={project.demoUrl}
                           target="_blank"
@@ -185,7 +187,17 @@ const Projects = () => {
                         >
                           {content.demoLabel || (lang === 'ES' ? 'Web en Vivo' : 'Live Website')} <ExternalLink size={16} />
                         </a>
-                      )}
+                      ) : project.isPrivate ? (
+                        <button
+                          type="button"
+                          onClick={() => setPrivateModalProject(project)}
+                          className="btn-secondary-sm"
+                          style={{ cursor: 'pointer' }}
+                        >
+                          <Lock size={15} />
+                          {lang === 'ES' ? 'Repositorio Privado' : 'Private Repository'}
+                        </button>
+                      ) : null}
                     </div>
                   </div>
                 </motion.div>
@@ -194,6 +206,131 @@ const Projects = () => {
           </AnimatePresence>
         </motion.div>
       </div>
+
+      {/* Private Repository Modal */}
+      <AnimatePresence>
+        {privateModalProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setPrivateModalProject(null)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              background: 'rgba(0, 0, 0, 0.85)',
+              backdropFilter: 'blur(8px)',
+              zIndex: 9999,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+              className="glass-card"
+              style={{
+                maxWidth: '480px',
+                width: '100%',
+                padding: '35px',
+                borderRadius: '24px',
+                position: 'relative',
+                textAlign: 'center'
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setPrivateModalProject(null)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer'
+                }}
+              >
+                <X size={20} />
+              </button>
+
+              <div style={{
+                width: '60px',
+                height: '60px',
+                borderRadius: '50%',
+                background: 'var(--accent-glow)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px auto'
+              }}>
+                <Lock size={30} className="accent-text" />
+              </div>
+
+              <h3 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '12px' }}>
+                {lang === 'ES' ? 'Repositorio Privado' : 'Private Repository'}
+              </h3>
+
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '25px', fontSize: '0.92rem' }}>
+                {lang === 'ES' ? (
+                  <>El código fuente y la versión productiva de <strong style={{ color: 'white' }}>{(privateModalProject[lang] || privateModalProject.ES).title}</strong> están en acceso privado por motivos de seguridad comercial. Si deseas evaluar la arquitectura o código, puedes solicitar acceso directo:</>
+                ) : (
+                  <>The source code and production deployment of <strong style={{ color: 'white' }}>{(privateModalProject[lang] || privateModalProject.ES).title}</strong> are private for commercial security. If you are reviewing my work as a recruiter or engineer, you can request direct access:</>
+                )}
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <a
+                  href={`https://wa.me/51924461067?text=Hola%20Sebastian,%20quisiera%20solicitar%20acceso%20al%20repositorio%20de%20${encodeURIComponent((privateModalProject[lang] || privateModalProject.ES).title)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    background: '#25D366',
+                    color: 'white',
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    fontSize: '0.92rem'
+                  }}
+                >
+                  <FaWhatsapp size={18} /> {lang === 'ES' ? 'Solicitar acceso por WhatsApp' : 'Request access via WhatsApp'}
+                </a>
+
+                <a
+                  href={`mailto:sebastiangairthon@gmail.com?subject=Solicitud%20de%20acceso%20a%20repositorio:%20${encodeURIComponent((privateModalProject[lang] || privateModalProject.ES).title)}`}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '10px',
+                    background: 'rgba(255, 255, 255, 0.08)',
+                    color: 'white',
+                    padding: '12px 20px',
+                    borderRadius: '12px',
+                    fontWeight: '700',
+                    textDecoration: 'none',
+                    fontSize: '0.92rem'
+                  }}
+                >
+                  {lang === 'ES' ? 'Solicitar por Correo Electrónico' : 'Request via Email'}
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
